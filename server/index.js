@@ -10,8 +10,8 @@ connectDB();
 
 // Middleware
 const allowedOrigins = [
-  'http://localhost:5173', // Vite default local dev
-  process.env.FRONTEND_URL || 'https://theluxuryinn.com'
+  'http://localhost:5173',
+  'https://theluxuryinn.vercel.app'
 ];
 app.use(cors({
   origin: function (origin, callback) {
@@ -40,5 +40,4 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5000;
-
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

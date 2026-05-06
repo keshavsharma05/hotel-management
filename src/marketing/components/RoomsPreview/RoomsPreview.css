@@ -1,0 +1,424 @@
+/* ================= ROOT ================= */
+
+:root {
+  --primary-gold: #c5a059;
+  --industrial-black: #1a1a1a;
+  --soft-white: #f8f8f8;
+  --text-grey: #555;
+  --transition-smooth: all 0.4s ease;
+}
+
+/* ================= SECTION ================= */
+
+.rooms-story-slider {
+  position: relative;
+  background: var(--soft-white);
+  padding: 50px 0;
+  overflow: hidden;
+}
+
+/* EDGE FADE (premium feel) */
+
+.rooms-story-slider::before,
+.rooms-story-slider::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 80px;
+  height: 100%;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.rooms-story-slider::before {
+  left: 0;
+  background: linear-gradient(to right, var(--soft-white), transparent);
+}
+
+.rooms-story-slider::after {
+  right: 0;
+  background: linear-gradient(to left, var(--soft-white), transparent);
+}
+
+/* ================= SCROLL TRACK ================= */
+
+.story-scroll-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  gap: 80px;
+  padding: 0 10vw;
+}
+
+.story-scroll-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* ================= SLIDE ================= */
+
+.story-slide {
+  min-width: 90vw;
+  scroll-snap-align: center;
+  display: flex;
+  justify-content: center;
+  opacity: 0.95;
+  transform: scale(0.96);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+/* ACTIVE SLIDE */
+
+.story-slide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ================= CONTAINER ================= */
+
+.story-container {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 60px;
+  max-width: 1200px;
+  width: 100%;
+  align-items: center;
+}
+
+/* ================= LEFT TEXT ================= */
+
+.story-text-side {
+  max-width: 500px;
+}
+
+.story-label {
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--primary-gold);
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.story-room-name {
+  font-size: 3.2rem;
+  font-family: 'Playfair Display', serif;
+  color: var(--industrial-black);
+  line-height: 1.1;
+  margin-bottom: 15px;
+}
+
+.story-divider {
+  width: 50px;
+  height: 3px;
+  background: var(--primary-gold);
+  margin: 20px 0;
+}
+
+.story-specs {
+  color: #888;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  margin-bottom: 25px;
+}
+
+.story-features-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 35px;
+}
+
+.feature-item {
+  font-size: 1.05rem;
+  color: var(--text-grey);
+  margin-bottom: 10px;
+  position: relative;
+  padding-left: 18px;
+}
+
+.feature-item::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--primary-gold);
+}
+
+/* BUTTON */
+
+.story-explore-btn {
+  background: var(--industrial-black);
+  color: white;
+  padding: 16px 36px;
+  border: none;
+  border-radius: 50px;
+  /* Pill shape */
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.story-explore-btn .btn-arrow {
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
+.story-explore-btn:hover {
+  background: var(--primary-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 15px 25px rgba(197, 160, 89, 0.3);
+}
+
+.story-explore-btn:hover .btn-arrow {
+  transform: translateX(5px);
+}
+
+/* FOOTER META - PROGRESS LINES */
+.story-footer-meta {
+  margin-top: 30px;
+}
+
+.story-progress-lines {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.progress-line {
+  height: 3px;
+  width: 20px;
+  background: rgba(0, 0, 0, 0.15);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 2px;
+}
+
+.progress-line.active {
+  width: 48px;
+  background: var(--primary-gold);
+}
+
+/* ================= RIGHT IMAGE LAYOUT ================= */
+
+.story-bento-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* HERO IMAGE */
+
+.bento-main-img {
+  height: 360px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.bento-main-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition-smooth);
+}
+
+/* FILM STRIP */
+
+.bento-sub-imgs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.bento-sub-img {
+  height: 150px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.bento-sub-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition-smooth);
+}
+
+/* IMAGE HOVER (subtle luxury, not chaos) */
+
+.story-slide:hover .bento-main-img img {
+  transform: scale(1.06);
+}
+
+.story-slide:hover .bento-sub-img img {
+  transform: scale(1.05);
+}
+
+/* ================= NAVIGATION ================= */
+
+.story-nav-layer {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  padding: 0 10px;
+  /* Space from the edges of the screen */
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 10;
+  transform: translateY(-50%);
+  /* Exact vertical center */
+}
+
+.story-controls {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.story-nav-btn {
+  pointer-events: auto;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  color: var(--industrial-black);
+  font-size: 24px;
+  /* Make the arrow icon larger */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  /* Strong shadow for depth */
+      background: transparent;
+    border: 1px solid #b89a72;
+    color: #b89a72;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.story-nav-btn:hover {
+background: #b89a72;
+    color: white;background: #b89a72;
+    color: white;
+}
+/* ===== SPECS WITH ICONS ===== */
+
+.story-specs {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: center; /* mobile friendly */
+  margin-bottom: 25px;
+}
+
+.spec-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.spec-icon {
+  font-size: 16px;
+  color: var(--primary-gold);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+.story-specs {
+  justify-content: center;
+  gap: 12px;
+}
+
+.spec-item {
+  font-size: 0.8rem;
+}
+  .story-container {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 0 16px;
+  }
+
+  .story-text-side {
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .story-room-name {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  .story-specs {
+    font-size: 0.8rem;
+  }
+
+  /* ✅ BRING BACK BULLETS (but cleaner) */
+  .feature-item {
+    padding-left: 0;
+    text-align: center;
+    font-size: 0.95rem;
+  }
+
+  .feature-item::before {
+    content: "•";
+    display: inline-block;
+    margin-right: 6px;
+    color: var(--primary-gold);
+    position: static;
+  }
+
+  /* Images */
+  .story-image-side {
+    margin-top: 10px;
+  }
+
+  .bento-main-img {
+    height: 220px;
+    border-radius: 12px;
+  }
+
+  .bento-sub-imgs {
+    gap: 10px;
+  }
+
+  .bento-sub-img {
+    height: 100px;
+  }
+
+  /* Button spacing */
+  .story-explore-btn {
+    margin-top: 10px;
+  }
+
+  /* Progress lines center */
+  .story-footer-meta {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Nav buttons bottom center */
+  .story-nav-layer {
+    bottom: 10px;
+  }
+  .rooms-story-slider::before,
+  .rooms-story-slider::after {
+    display: none;
+  }
+}

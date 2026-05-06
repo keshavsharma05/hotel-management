@@ -1,0 +1,96 @@
+.success-content {
+  background: var(--bg-secondary);
+  padding: 150px 0 100px;
+  min-height: 80vh;
+}
+
+.success-card {
+  background: var(--white);
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 60px 40px;
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
+}
+
+.success-icon {
+  font-size: 80px;
+  color: #10b981;
+  margin-bottom: 30px;
+}
+
+.success-card h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.success-msg {
+  color: var(--text-light);
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+.booking-details-box {
+  background: var(--bg-secondary);
+  padding: 24px;
+  border-radius: 12px;
+  margin-bottom: 40px;
+  text-align: left;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.detail-item:last-child {
+  margin-bottom: 0;
+}
+
+.status-badge {
+  background: #d1fae5;
+  color: #065f46;
+  padding: 4px 12px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.email-note {
+  font-size: 14px;
+  color: var(--text-light);
+  margin-bottom: 40px;
+}
+
+.success-actions {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.btn-outline-dark {
+  background: transparent;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  padding: 12px 28px;
+  border-radius: 4px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.back-home {
+  display: block;
+  font-size: 14px;
+  color: var(--text-light);
+  text-decoration: underline;
+}
+
+@media (max-width: 576px) {
+  .success-actions {
+    flex-direction: column;
+  }
+}

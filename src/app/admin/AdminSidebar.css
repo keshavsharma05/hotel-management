@@ -1,0 +1,257 @@
+/* ===== ADMIN SIDEBAR — Hotel Theme ===== */
+
+.admin-sidebar {
+  width: 260px;
+  background-color: var(--primary);
+  color: var(--white);
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 36px 24px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  border-right: 1px solid rgba(181, 81, 50, 0.2);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease;
+  overflow: hidden;
+}
+
+/* Background Image Overlay elements */
+.sidebar-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(25px);
+  transform: scale(1.15); /* Prevent blurred edges from leaking */
+  z-index: -2;
+}
+
+.sidebar-bg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(44, 40, 37, 0.75) 0%, rgba(44, 40, 37, 0.95) 100%);
+  z-index: -1;
+}
+
+/* Subtle gold accent line at top */
+.admin-sidebar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--secondary), var(--accent), var(--secondary));
+  z-index: 10;
+}
+
+.admin-sidebar.collapsed {
+  width: 80px;
+  padding: 36px 15px;
+}
+
+/* ─── Logo ─── */
+.admin-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  line-height: 1.2;
+  margin-bottom: 52px;
+  margin-top: 6px;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: all 0.3s;
+  color: var(--bg-primary);
+}
+
+.collapsed .admin-logo {
+  font-size: 15px;
+  text-align: center;
+}
+
+.admin-logo span {
+  display: block;
+  font-size: 9px;
+  color: var(--secondary);
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+  margin-top: 6px;
+  font-weight: 800;
+  letter-spacing: 0.3em;
+}
+
+/* Decorative divider under logo */
+.admin-logo-divider {
+  width: 36px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--secondary), transparent);
+  margin-bottom: 36px;
+  transition: opacity 0.3s;
+}
+
+.collapsed .admin-logo-divider {
+  opacity: 0;
+}
+
+/* ─── Nav ─── */
+.admin-nav {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 18px;
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 13.5px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  letter-spacing: 0.01em;
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-nav-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--secondary);
+  border-radius: 0 2px 2px 0;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.admin-nav-item:hover {
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.admin-nav-item:hover::before {
+  opacity: 0.5;
+}
+
+.collapsed .admin-nav-item {
+  justify-content: center;
+  padding: 14px 0;
+}
+
+.admin-nav-item.active {
+  background: linear-gradient(135deg, rgba(181, 81, 50, 0.35), rgba(181, 81, 50, 0.15));
+  color: var(--white);
+  border: 1px solid rgba(181, 81, 50, 0.4);
+  font-weight: 700;
+}
+
+.admin-nav-item.active::before {
+  opacity: 1;
+}
+
+.admin-nav-item svg {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+/* ─── Footer / Bottom Links ─── */
+.admin-footer-links {
+  border-top: 1px solid rgba(181, 81, 50, 0.15);
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-logout {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.55);
+  padding: 13px 18px;
+  font-size: 13.5px;
+  font-weight: 500;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.25s;
+  font-family: 'Inter', sans-serif;
+}
+
+.admin-logout:hover {
+  color: #fca5a5;
+  background: rgba(239, 68, 68, 0.08);
+}
+
+.collapsed .admin-logout {
+  justify-content: center;
+  padding: 14px 0;
+}
+
+/* ─── Toggle Button ─── */
+.sidebar-toggle-v2 {
+  position: absolute;
+  right: -14px;
+  top: 44px;
+  width: 28px;
+  height: 28px;
+  background: var(--primary);
+  border: 1px solid rgba(181, 81, 50, 0.35);
+  color: var(--secondary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1001;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.25s;
+  font-size: 14px;
+}
+
+.sidebar-toggle-v2:hover {
+  background: var(--secondary);
+  color: var(--white);
+  border-color: var(--secondary);
+  transform: scale(1.1);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 1024px) {
+  .admin-sidebar {
+    width: 80px;
+    padding: 30px 15px;
+  }
+
+  .admin-logo, .admin-nav-item span, .admin-logout span {
+    display: none;
+  }
+
+  .admin-logo {
+    font-size: 12px;
+    margin-bottom: 40px;
+    display: block;
+  }
+
+  .admin-nav-item {
+    padding: 14px;
+    justify-content: center;
+  }
+}

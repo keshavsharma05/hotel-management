@@ -1,0 +1,245 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 0;
+  z-index: 1000;
+  transition: all 0.4s ease;
+  background-color: transparent;
+}
+
+.navbar.scrolled {
+  background-color: var(--white);
+  padding: 12px 0;
+  box-shadow: var(--shadow);
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: "Playfair Display", serif;
+  font-size: 16px;
+  letter-spacing: 4px;
+  font-weight: 500;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.navbar.scrolled .logo {
+  color: #111;
+}
+
+.nav-logo-img {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.navbar.scrolled .nav-logo-img {
+  filter: none;
+}
+
+.nav-logo-break {
+  display: inline-block;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+}
+
+.nav-link {
+  color: var(--white);
+  font-weight: 500;
+  font-size: 15px;
+  opacity: 0.9;
+}
+
+.navbar.scrolled .nav-link {
+  color: var(--text-main);
+}
+
+.nav-link:hover {
+  color: var(--secondary);
+  opacity: 1;
+}
+
+.nav-btn {
+  appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.15));
+  color: #fff;
+  padding: 12px 22px;
+  border-radius: 999px !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+  font-weight: 800;
+  display: flex !important;
+  align-items: center;
+  gap: 12px;
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
+}
+
+.nav-btn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2));
+  border-color: #fff;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.24);
+  color: #fff;
+}
+
+.navbar.scrolled .nav-btn {
+  background: #111;
+  color: white;
+  border-color: #111;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.navbar.scrolled .nav-btn:hover {
+  background: #333;
+  color: white;
+  border-color: #333;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.cart-badge {
+  background: #b45309;
+  color: white;
+  font-size: 10px;
+  font-weight: 800;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.profile-icon-btn {
+  appearance: none;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  color: white;
+  transition: all 0.3s ease;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.profile-icon-btn:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1));
+  border-color: rgba(255, 255, 255, 0.8);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.navbar.scrolled .profile-icon-btn {
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: #111;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+}
+
+.navbar.scrolled .profile-icon-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: #111;
+}
+
+.profile-icon-btn.logged-in {
+  /* No special border color needed, the dot handles it */
+}
+
+.navbar.scrolled .profile-icon-btn.logged-in {
+  /* No special border color needed */
+}
+
+.online-dot {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 10px;
+  height: 10px;
+  background: #b45309;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+}
+
+.navbar.scrolled .online-dot {
+  border-color: white;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .logo {
+    font-size: 14px;
+    letter-spacing: 2px;
+    gap: 8px;
+  }
+
+  .nav-logo-img {
+    height: 26px;
+  }
+
+  .nav-actions {
+    gap: 12px;
+  }
+
+  .nav-btn {
+    padding: 10px 16px;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+  }
+
+  .profile-icon-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-logo-break {
+    display: none;
+  }
+}

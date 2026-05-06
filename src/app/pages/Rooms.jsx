@@ -27,6 +27,8 @@ const Rooms = () => {
     localStorage.setItem('selectedDates', JSON.stringify(dates));
   }, [dates]);
 
+  const [isLoading, setIsLoading] = useState(true);
+
   const roomCategories = currentHotel?.roomCategories || [];
   const roomCategoriesByName = roomCategories.reduce((categoriesMap, category, index) => {
     categoriesMap[category.name] = {
@@ -37,6 +39,7 @@ const Rooms = () => {
   }, {});
 
   const fetchAvailability = (dateParams) => {
+    setIsLoading(true);
     getAvailableRoomsByCategory(dateParams.checkIn, dateParams.checkOut).then(data => {
       const enrichedRooms = data.map((room, index) => {
         const roomCategory = roomCategoriesByName[room.name] || {};
@@ -53,7 +56,11 @@ const Rooms = () => {
 
       setAllRooms(enrichedRooms);
       setFilteredRooms(enrichedRooms);
-    }).catch(err => console.error('[Rooms] fetchAvailability:', err));
+      setIsLoading(false);
+    }).catch(err => {
+      console.error('[Rooms] fetchAvailability:', err);
+      setIsLoading(false);
+    });
   };
 
   useEffect(() => {
@@ -122,7 +129,14 @@ const Rooms = () => {
             <p>Showing {filteredRooms.length} room categories</p>
           </div>
 
-          {filteredRooms.length > 0 ? (
+          {isLoading ? (
+            <div className="fetching-state text-center" style={{ padding: '4rem 0' }}>
+              <div className="premium-loader"></div>
+              <h3 style={{ marginTop: '1.5rem', fontWeight: '300', letterSpacing: '0.05em' }}>
+                Fetching room categories...
+              </h3>
+            </div>
+          ) : filteredRooms.length > 0 ? (
             <div className="rooms-grid-app">
               {filteredRooms.map((room, index) => (
                 <RoomCard key={room.id || room._id || index} room={room} hotelId={hotelId} />

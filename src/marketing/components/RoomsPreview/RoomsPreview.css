@@ -215,7 +215,7 @@
 .bento-main-img {
   height: 360px;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .bento-main-img img {
@@ -236,7 +236,7 @@
 .bento-sub-img {
   height: 150px;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .bento-sub-img img {
@@ -398,7 +398,7 @@
 
   .bento-main-img {
     height: 220px;
-    border-radius: 12px;
+    border-radius: 5px;
   }
 
   .bento-sub-imgs {

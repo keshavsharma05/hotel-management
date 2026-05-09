@@ -225,3 +225,141 @@
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, transparent 20%, rgba(0, 0, 0, 0.4) 100%);
   }
 }
+
+/* Availability Checker Styles */
+.hero__availability {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 12px 30px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 100px;
+  width: fit-content;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.avail__dates-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.avail__item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.avail__item label {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+}
+
+.avail__item input {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+  width: 140px;
+}
+
+/* Custom color for date icon in Chrome/Safari */
+.avail__item input::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.avail__item input::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+.avail__divider {
+  width: 1px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.avail__btn {
+  background: #fff;
+  color: #000;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-left: 10px;
+}
+
+.avail__btn:hover {
+  background: #f0f0f0;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.avail__btn:active {
+  transform: translateY(0);
+}
+
+/* Mobile Responsive for Availability Box */
+@media (max-width: 768px) {
+  .hero__availability {
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    padding: 16px;
+    width: calc(100% - 40px);
+    max-width: 360px;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .avail__dates-row {
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 0 8px;
+  }
+
+  .avail__divider {
+    height: 25px;
+  }
+
+  .avail__item {
+    flex: 1;
+  }
+
+  .avail__item label {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+
+  .avail__item input {
+    width: 100%;
+    font-size: 13px;
+  }
+
+  .avail__btn {
+    margin-left: 0;
+    width: 100%;
+    padding: 14px;
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+}

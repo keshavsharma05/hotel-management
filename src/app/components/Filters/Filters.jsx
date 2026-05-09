@@ -2,13 +2,19 @@ import React, { useState, useRef, useEffect } from 'react';
 import { RiSearchLine, RiCalendarLine, RiHotelLine, RiPriceTag3Line, RiArrowDownSLine } from 'react-icons/ri';
 import './Filters.css';
 
-const Filters = ({ roomTypes = [], onSearch, onTypeFilter, onPriceFilter, onDateChange }) => {
+const Filters = ({ roomTypes = [], onSearch, onTypeFilter, onPriceFilter, onDateChange, initialDates }) => {
   const today = new Date().toISOString().split('T')[0];
 
-  const [dates, setDates] = useState({
+  const [dates, setDates] = useState(initialDates || {
     checkIn: today,
     checkOut: new Date(Date.now() + 86400000).toISOString().split('T')[0]
   });
+
+  useEffect(() => {
+    if (initialDates) {
+      setDates(initialDates);
+    }
+  }, [initialDates]);
 
   const [isTypeOpen, setIsTypeOpen] = useState(false);
   const [selectedType, setSelectedType] = useState('All Categories');

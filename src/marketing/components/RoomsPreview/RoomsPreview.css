@@ -277,51 +277,53 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .story-nav-btn {
   pointer-events: auto;
-  width: 54px;
-  height: 54px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: var(--transition-smooth);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   color: var(--industrial-black);
-  font-size: 24px;
-  /* Make the arrow icon larger */
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  /* Strong shadow for depth */
-      background: transparent;
-    border: 1px solid #b89a72;
-    color: #b89a72;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+  font-size: 22px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  z-index: 100;
 }
 
 .story-nav-btn:hover {
-background: #b89a72;
-    color: white;background: #b89a72;
-    color: white;
+  background: #ffffff;
+  border-color: var(--primary-gold);
+  color: var(--primary-gold);
+  transform: scale(1.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
+
+/* Ensure the hover transform doesn't break the vertical centering */
+.story-nav-layer .story-nav-btn {
+  transform: none;
+  /* Reset for individual buttons if needed, but the parent has top:50% */
+}
+
+.story-nav-btn:active {
+  transform: scale(0.95);
+}
+
 /* ===== SPECS WITH ICONS ===== */
 
 .story-specs {
   display: flex;
   gap: 18px;
   flex-wrap: wrap;
-  justify-content: center; /* mobile friendly */
+  justify-content: center;
+  /* mobile friendly */
   margin-bottom: 25px;
 }
 
@@ -341,14 +343,19 @@ background: #b89a72;
 /* ================= RESPONSIVE ================= */
 
 @media (max-width: 768px) {
-.story-specs {
-  justify-content: center;
-  gap: 12px;
-}
+  .desktop-progress {
+    display: none !important;
+  }
 
-.spec-item {
-  font-size: 0.8rem;
-}
+  .story-specs {
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .spec-item {
+    font-size: 0.8rem;
+  }
+
   .story-container {
     grid-template-columns: 1fr;
     gap: 28px;
@@ -405,20 +412,47 @@ background: #b89a72;
   /* Button spacing */
   .story-explore-btn {
     margin-top: 10px;
-  }
-
-  /* Progress lines center */
-  .story-footer-meta {
-    display: flex;
-    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   /* Nav buttons bottom center */
   .story-nav-layer {
-    bottom: 10px;
+    top: auto;
+    bottom: 5px;
+    transform: none;
+    padding: 10px 20px;
+    position: absolute;
+    width: 100%;
   }
+
+  .story-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .global-progress {
+    display: flex !important;
+    margin-bottom: 0;
+  }
+
   .rooms-story-slider::before,
   .rooms-story-slider::after {
     display: none;
+  }
+}
+
+/* GLOBAL PROGRESS VISIBILITY */
+@media (min-width: 769px) {
+  .global-progress {
+    display: none !important;
+  }
+
+  .desktop-progress {
+    display: block !important;
   }
 }

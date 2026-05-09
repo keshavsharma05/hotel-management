@@ -1,17 +1,96 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useHotel } from '../../../services/HotelContext';
 import { RiArrowLeftSLine, RiArrowRightSLine, RiArrowRightLine ,RiUserLine, RiCheckboxBlankLine, RiDropLine} from 'react-icons/ri';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './RoomsPreview.css';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const RoomsPreview = () => {
   const { hotelId, currentHotel } = useHotel();
   const navigate = useNavigate();
   const scrollRef = useRef(null);
+  const sectionRef = useRef(null);
 
   const roomCategories = currentHotel?.roomCategories || [];
 
   const [activeIndex, setActiveIndex] = useState(0);
+
+  // Section Entrance Animation (runs when data is loaded)
+  useEffect(() => {
+    if (!roomCategories || roomCategories.length === 0) return;
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 85%",
+          toggleActions: "play none none none"
+        },
+        defaults: { ease: "power2.out", duration: 0.5 }
+      });
+
+      tl.from(".story-label", {
+        y: 20,
+        opacity: 0,
+      })
+      .fromTo(".story-nav-btn", 
+        { scale: 0, opacity: 0 },
+        { 
+          scale: 1, 
+          opacity: 1, 
+          stagger: 0.1, 
+          ease: "back.out(1.7)",
+          clearProps: "all" 
+        }, 
+        "-=0.3"
+      )
+      .fromTo(".story-slide:first-child .story-room-name", 
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, clearProps: "all" },
+        "-=0.3"
+      )
+      .fromTo(".story-slide:first-child .story-divider", 
+        { scaleX: 0, transformOrigin: "left" },
+        { scaleX: 1, clearProps: "all" },
+        "-=0.3"
+      )
+      .fromTo(".story-slide:first-child .spec-item", 
+        { y: 15, opacity: 0 },
+        { y: 0, opacity: 1, stagger: 0.08, clearProps: "all" },
+        "-=0.2"
+      )
+      .fromTo(".story-slide:first-child .feature-item", 
+        { x: -15, opacity: 0 },
+        { x: 0, opacity: 1, stagger: 0.05, clearProps: "all" },
+        "-=0.2"
+      )
+      .fromTo(".story-slide:first-child .story-explore-btn", 
+        { y: 15, opacity: 0 },
+        { 
+          y: 0, 
+          opacity: 1, 
+          clearProps: "all" 
+        }, 
+        "-=0.2"
+      )
+      .fromTo(".story-slide:first-child .story-bento-grid", 
+        { scale: 0.95, opacity: 0 },
+        { 
+          scale: 1, 
+          opacity: 1, 
+          duration: 0.8, 
+          ease: "power2.out",
+          clearProps: "all"
+        }, 
+        "-=0.4"
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, [currentHotel, roomCategories.length]);
 
   const handleScroll = (e) => {
     const scrollLeft = e.target.scrollLeft;
@@ -37,14 +116,7 @@ const RoomsPreview = () => {
   }
 
   return (
-    <section className="rooms-story-slider">
-      <div className="story-nav-layer">
-        <div className="story-controls">
-          <button className="story-nav-btn" onClick={() => scroll('left')}><RiArrowLeftSLine /></button>
-          <button className="story-nav-btn" onClick={() => scroll('right')}><RiArrowRightSLine /></button>
-        </div>
-      </div>
-
+    <section className="rooms-story-slider" ref={sectionRef}>
       <div className="story-scroll-track" ref={scrollRef} onScroll={handleScroll}>
         {roomCategories.map((room, index) => (
           <div key={room.id} className="story-slide">
@@ -83,7 +155,9 @@ const RoomsPreview = () => {
                     RESERVE NOW <RiArrowRightLine className="btn-arrow" />
                   </button>
                 </div>
-                <div className="story-footer-meta">
+
+                {/* DESKTOP ONLY PROGRESS LINES */}
+                <div className="story-footer-meta desktop-progress">
                   <div className="story-progress-lines">
                     {roomCategories.map((_, i) => (
                       <div key={i} className={`progress-line ${i === activeIndex ? 'active' : ''}`}></div>
@@ -111,6 +185,20 @@ const RoomsPreview = () => {
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="story-nav-layer">
+        <div className="story-controls">
+          <button className="story-nav-btn" onClick={() => scroll('left')}><RiArrowLeftSLine /></button>
+          
+          <div className="story-progress-lines global-progress">
+            {roomCategories.map((_, i) => (
+              <div key={i} className={`progress-line ${i === activeIndex ? 'active' : ''}`}></div>
+            ))}
+          </div>
+
+          <button className="story-nav-btn" onClick={() => scroll('right')}><RiArrowRightSLine /></button>
+        </div>
       </div>
     </section>
   );

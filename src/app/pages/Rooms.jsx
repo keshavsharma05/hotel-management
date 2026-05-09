@@ -121,6 +121,7 @@ const Rooms = () => {
         onTypeFilter={setTypeFilter}
         onPriceFilter={setPriceFilter}
         onDateChange={handleDateChange}
+        initialDates={dates}
       />
 
       <section className="section rooms-results">

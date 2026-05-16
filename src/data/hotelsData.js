@@ -4,7 +4,7 @@ export const hotels = {
     name: "The Luxury Inn",
     location: "London, UK",
     tagline: "Your Cozy Home Away From Home",
-    heroImage: "/images/hotel-property/hero.png",
+    heroImage: "/images/hotel-property/hero.webp",
     amenities: ["Self-Service Breakfast", "Delicious Coffee", "Cozy Neighborhood", "Self check-in", "High-speed Wi-Fi"],
     roomTypeFeatures: {
       "Superior Double Room": {
@@ -59,7 +59,7 @@ export const hotels = {
       { url: "/images/hotel-property/gallery1.jpg", category: "Property View" },
       { url: "/images/hotel-property/gallery2.jpg", category: "Interior Details" },
       { url: "/images/hotel-property/gallery3.jpg", category: "Sanctuary" },
-      { url: "/images/hotel-property/hero.png", category: "Main Suite" },
+      { url: "/images/hotel-property/hero.webp", category: "Main Suite" },
       { url: "/images/hotel-property/superior_double_1.jpg", category: "Superior Double" },
       { url: "/images/hotel-property/superior_double_2.jpg", category: "Suite Details" },
       { url: "/images/hotel-property/superior_double_3.jpg", category: "Modern Living" },

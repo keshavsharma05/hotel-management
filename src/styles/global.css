@@ -29,6 +29,10 @@
   box-sizing: border-box;
 }
 
+html {
+  /* Lenis handles smooth scrolling, so we remove scroll-behavior: smooth here */
+}
+
 body {
   font-family: var(--font-sans);
   color: var(--text-main);

@@ -115,7 +115,6 @@
 .rooms-grid-app {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  align-items: start;
   gap: 24px;
 }
 
@@ -130,7 +129,6 @@
 @media (max-width: 1024px) {
   .rooms-grid-app {
     grid-template-columns: repeat(2, 1fr);
-    align-items: start;
   }
 
   .hero-text-premium h1 {
@@ -149,7 +147,6 @@
 
   .rooms-grid-app {
     grid-template-columns: 1fr;
-    align-items: start;
   }
 
   .rooms-hero-premium {

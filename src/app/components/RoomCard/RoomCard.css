@@ -332,3 +332,76 @@
   .room-name-title { font-size: 20px; }
   .room-card-media { height: 180px; }
 }
+
+
+.room-expanded-details {
+  overflow: hidden;
+  transition: none; /* remove height transition — conditional render handles show/hide */
+}
+
+.room-expanded-details.show {
+  display: block;
+}
+
+/* FIX 3: Selected state row — SELECTED + deselect X button side by side */
+.selected-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+}
+
+.selected-actions-row .selected-btn {
+  flex: 1;
+  background: #4CAF50;
+  color: white;
+  border-color: #4CAF50;
+  font-size: 11px;
+}
+
+.deselect-btn {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #e0e0e0;
+  background: transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.deselect-btn:hover {
+  border-color: #ff4444;
+  color: #ff4444;
+  background: #fff5f5;
+}
+
+/* FIX 4: Hint text under actions */
+.cart-hint-text {
+  font-size: 11px;
+  color: #4CAF50;
+  text-align: center;
+  margin-top: 8px;
+  margin-bottom: 0;
+  opacity: 0.85;
+  letter-spacing: 0.01em;
+}
+
+/* FIX 5: Icon tooltips — browser handles title attr, but add cursor hint */
+.spec-icon-hit {
+  cursor: help;
+  position: relative;
+}
+
+/* FIX 6: Card actions grid — make primary CTA take more space than secondary */
+.card-actions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 8px;
+  align-items: center;
+}

@@ -20,7 +20,6 @@ const Hero = () => {
   const contentRef = useRef(null);
   const scrollRef = useRef(null);
   const availRef = useRef(null);
-  const whatsappRef = useRef(null);
 
   // GSAP animation
   useEffect(() => {
@@ -78,22 +77,6 @@ const Hero = () => {
         },
         "-=0.8"
       );
-      tl.fromTo(
-  whatsappRef.current,
-  {
-    y: 20,
-    opacity: 0,
-    scale: 0.95,
-  },
-  {
-    y: 0,
-    opacity: 1,
-    scale: 1,
-    duration: 0.8,
-    ease: "power3.out",
-  },
-  "-=0.5"
-);
 
       if (!isMobile) {
         tl.from(
@@ -142,7 +125,7 @@ const Hero = () => {
 
       {/* Navbar */}
       <div className="hero__nav" ref={navRef}>
-        <div className="hero__menu">
+        <div className="hero__menu" onClick={() => window.location.reload()}>
           <img
             src="/images/hotel-property/logo.png"
             alt="Hotel Logo"
@@ -151,13 +134,25 @@ const Hero = () => {
           {formatName(currentHotel.name.toUpperCase())}
         </div>
 
-        <button
-          type="button"
-          className="hero__enquire"
-          onClick={() => navigate(`/app`)}
-        >
-          BOOK NOW
-        </button>
+        <div className="hero__nav-actions">
+          <a
+            href="https://wa.me/919876543210?text=Hi%20I%20want%20to%20book%20a%20stay"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hero__whatsapp"
+            title="Chat on WhatsApp"
+          >
+            <FaWhatsapp className="hero__whatsapp-icon" />
+            <span className="hero__whatsapp-text">CHAT ON WHATSAPP</span>
+          </a>
+          <button
+            type="button"
+            className="hero__enquire"
+            onClick={() => navigate(`/app`)}
+          >
+            BOOK NOW
+          </button>
+        </div>
       </div>
 
       {/* Content */}
@@ -197,16 +192,6 @@ const Hero = () => {
             CHECK AVAILABILITY
           </button>
         </div>
-<a
-  href="https://wa.me/919876543210?text=Hi%20I%20want%20to%20book%20a%20stay"
-  target="_blank"
-  rel="noopener noreferrer"
-className="hero__whatsapp"
-ref={whatsappRef}
->
-  <FaWhatsapp className="hero__whatsapp-icon" />
-  CHAT ON WHATSAPP
-</a>
       </div>
 
       {/* Scroll */}

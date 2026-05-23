@@ -10,7 +10,6 @@ import GalleryPage from './marketing/pages/GalleryPage';
 
 // App Pages
 import Rooms from './app/pages/Rooms';
-import RoomDetails from './app/pages/RoomDetails';
 import Booking from './app/pages/Booking';
 import Success from './app/pages/Success';
 import ProfileDashboard from './app/pages/ProfileDashboard';
@@ -29,7 +28,13 @@ import { HotelProvider } from './services/HotelContext';
 import ProtectedRoute from './app/components/ProtectedRoute';
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(() => {
+    // Skip simple app loader on landing page so the premium preloader is shown immediately
+    if (window.location.pathname === '/') {
+      return false;
+    }
+    return true;
+  });
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -108,7 +113,6 @@ function App() {
             <Route path="/gallery" element={<GalleryPage />} />
 
             <Route path="/app" element={<Rooms />} />
-            <Route path="/app/room/:id" element={<RoomDetails />} />
             <Route path="/app/booking" element={<Booking />} />
             <Route path="/app/success" element={<Success />} />
 

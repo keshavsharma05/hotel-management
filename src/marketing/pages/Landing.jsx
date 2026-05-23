@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Hero from '../components/Hero/Hero';
 import Features from '../components/Features/Features';
@@ -8,9 +8,11 @@ import History from '../components/History/History';
 import Testimonials from '../components/Testimonials/Testimonials';
 import CTA from '../components/CTA/CTA';
 import Footer from '../components/Footer/Footer';
+import Preloader from '../../app/components/Preloader/Preloader';
 
 const Landing = () => {
   const location = useLocation();
+  const [showIntro, setShowIntro] = useState(true);
 
   useEffect(() => {
     if (location.hash) {
@@ -28,6 +30,13 @@ const Landing = () => {
 
   return (
     <div className="landing-page">
+      {showIntro && (
+        <Preloader
+          onComplete={() => {
+            setShowIntro(false);
+          }}
+        />
+      )}
       <Hero />
       <RoomsPreview />
       <Features />

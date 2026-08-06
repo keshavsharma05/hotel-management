@@ -15,7 +15,7 @@ require('./cronJobs');
 const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:5174',
-  'https://theluxuryinn.vercel.app',
+  'https://thecozyinn.vercel.app/',
   process.env.FRONTEND_URL // Allow dynamically setting from Render env vars
 ];
 app.use(cors({

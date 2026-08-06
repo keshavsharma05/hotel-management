@@ -1,183 +1,285 @@
 <div align="center">
-  <img src="public/github-hero.png" alt="InnFlow Hero" width="100%" />
+  <img src="./public/github/banner.png" alt="InnFlow Banner" width="100%" />
+
   <h1>InnFlow</h1>
-  
-  <p><strong>Modern Hotel Operations & Booking Platform</strong></p>
-  
-  <p>A comprehensive, digital-first solution designed to streamline hotel administration and elevate the guest booking experience.</p>
+  <p><strong>A Premium Boutique Hotel Management & Booking Platform</strong></p>
 
   <p>
-    <a href="#">Live Demo</a> •
-    <a href="#">Documentation</a> •
-    <a href="#">Report Issue</a> •
-    <a href="#">Request Feature</a>
+    <a href="https://thecozyinn.vercel.app"><img src="https://img.shields.io/badge/Live_Demo-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo" /></a>
+    <a href="https://github.com/keshavsharma05/innflow"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Repository" /></a>
   </p>
 </div>
 
 ---
 
-## 🛑 The Problem
+## Overview
 
-Small and medium-sized hotels are often bogged down by inefficient, manual workflows. Guests frequently resort to calling reception just to check room availability, leading to bottlenecks and crowded lobbies during peak check-in hours. 
+InnFlow is a headless booking engine and property management system designed exclusively for boutique hotels and luxury accommodations. It provides a seamless, cinematic guest experience while giving property owners a powerful suite of operational tools. 
 
-Behind the desk, administrative staff spend countless hours maintaining physical booking ledgers or fragmented spreadsheets. This reliance on manual entry inevitably introduces human error, duplicate reservations, and disconnected availability data across different channels.
-
-## ✨ The Solution
-
-InnFlow digitizes and centralizes these critical operations into a single, cohesive platform. 
-
-By eliminating manual ledgers, InnFlow empowers both guests and managers with synchronized, real-time data. Guests enjoy a frictionless, self-serve booking experience from any device, while management benefits from automated availability tracking, streamlined administration, and a drastic reduction in repetitive administrative tasks.
+By eliminating the friction of traditional hotel software, InnFlow solves the dual problem of modern hospitality: delivering a flawless digital booking journey while automating backend operations like inventory synchronization and contactless check-ins.
 
 ---
 
-## 🚀 Key Features
+## Preview
 
-### Guest Experience
-* **Live Availability Engine:** Real-time room status checking without calling reception.
-* **Seamless Discovery:** Browse room types, amenities, and high-quality imagery.
-* **Booking History:** Dedicated guest portal to view past and upcoming stays.
+<table width="100%">
+  <tr>
+    <td width="50%" align="center">
+      <img src="./public/github/landing.png" alt="Luxury Guest Experience" width="100%" />
+      <br />
+      <em>Luxury Guest Experience</em>
+    </td>
+    <td width="50%" align="center">
+      <img src="./public/github/dashboard.png" alt="Owner Dashboard" width="100%" />
+      <br />
+      <em>Owner Dashboard</em>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <img src="./public/github/qr-scanner.png" alt="QR Check-In" width="100%" />
+      <br />
+      <em>QR Check-In</em>
+    </td>
+    <td width="50%" align="center">
+      <img src="./public/github/digital-pass.png" alt="Digital Guest Pass" width="100%" />
+      <br />
+      <em>Digital Guest Pass</em>
+    </td>
+  </tr>
+</table>
 
-### Administration
-* **Centralized Dashboard:** A command center for all hotel operations.
-* **Inventory Control:** Manage rooms, pricing, and availability states effortlessly.
-* **Customer Management:** Maintain detailed profiles and stay histories for all guests.
+---
 
-### Booking & Operations
-* **Digital Reservations:** Secure, error-free online booking flow.
-* **Conflict Prevention:** Automated double-booking protection.
-* **QR Check-in:** Frictionless, contact-free arrival experience.
+## How InnFlow Works
+
+```mermaid
+graph TD
+    A[Guest] -->|Choose Dates| B(Browse Available Rooms)
+    B -->|Select Rooms| C(Book & Pay)
+    C -->|Generate| D[Digital Guest Pass]
+    D -.->|Arrival| E(Owner Scans QR)
+    E -->|Verify| F[Guest Checked In]
+    
+    style A fill:#000,stroke:#333,stroke-width:1px,color:#fff
+    style D fill:#000,stroke:#333,stroke-width:1px,color:#fff
+    style F fill:#000,stroke:#333,stroke-width:1px,color:#fff
+```
+
+---
+
+## Features
+
+<table width="100%">
+  <tr>
+    <td width="50%">
+      <strong>Luxury Guest Experience</strong><br />
+      Cinematic scrolling, dynamic cart functionality, and premium UI elements powered by GSAP and Lenis.
+    </td>
+    <td width="50%">
+      <strong>Owner Dashboard</strong><br />
+      Centralized command center for managing reservations, analyzing capacity, and overseeing property inventory.
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <strong>Real-Time Availability</strong><br />
+      Intelligent date querying against MongoDB to prevent overbooking and accurately calculate inventory.
+    </td>
+    <td width="50%">
+      <strong>QR Check-In</strong><br />
+      Built-in hardware-agnostic QR scanning engine for immediate guest verification at the front desk.
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <strong>JWT Authentication</strong><br />
+      Secure, role-based access control protecting administrative routes and sensitive operational data.
+    </td>
+    <td width="50%">
+      <strong>Booking Management</strong><br />
+      Automated lifecycle transitions from reservation to check-in, check-out, and memory archiving.
+    </td>
+  </tr>
+</table>
+
+---
+
+## Architecture
+
+```mermaid
+graph TD
+    A[React Client] -->|REST API| B(Express Node.js Server)
+    B -->|Middleware| C{JWT Authentication}
+    C -->|Authorized| D[(MongoDB Atlas)]
+    C -->|Unauthorized| A
+    
+    subgraph Deployment
+        Vercel[Vercel Edge] -.-> A
+        Render[Render Cloud] -.-> B
+    end
+```
+
+---
+
+## Tech Stack
+
+<table width="100%">
+  <tr>
+    <td width="33%">
+      <strong>Frontend</strong><br />
+      React 19<br />
+      Vite<br />
+      GSAP & Lenis
+    </td>
+    <td width="33%">
+      <strong>Backend</strong><br />
+      Node.js<br />
+      Express 5<br />
+      Node-cron
+    </td>
+    <td width="33%">
+      <strong>Database</strong><br />
+      MongoDB Atlas<br />
+      Mongoose ODM
+    </td>
+  </tr>
+  <tr>
+    <td width="33%">
+      <strong>Authentication</strong><br />
+      JSON Web Tokens (JWT)<br />
+      Bcrypt<br />
+      Role-Based Access
+    </td>
+    <td width="33%">
+      <strong>Deployment</strong><br />
+      Vercel (Frontend)<br />
+      Render (Backend)
+    </td>
+    <td width="33%">
+      <strong>Developer Tools</strong><br />
+      ESLint<br />
+      Nodemon<br />
+      Dotenv
+    </td>
+  </tr>
+</table>
+
+---
+
+## Project Structure
+
+* **`/public`** — Contains static assets, brand imagery, and the dynamically generated HTML5 QR configurations.
+* **`/server`** — The decoupled Node.js API environment containing all business logic, cron jobs, and database schemas.
+* **`/server/models`** — Mongoose data models defining the strict shape of Users, Rooms, and Bookings.
+* **`/server/controllers`** — Dedicated handlers that isolate the request logic from routing definitions.
+* **`/src`** — The Vite React frontend application.
+* **`/src/app/admin`** — Protected components exclusively for the property owners (Dashboard, Scanner, Management).
+* **`/src/marketing`** — High-performance, SEO-optimized landing pages designed for conversion.
+* **`/src/services`** — Abstracted API fetchers and Context API providers for global state management.
+
+---
+
+## API Overview
 
 ### Authentication
-* **Secure Access:** JWT-based authentication for guests and administrators.
-* **Role-Based Permissions:** Strict access control separating management from public users.
+* `POST /api/auth/verify-otp` — Authenticates guests and issues tokens.
+* `POST /api/auth/admin-login` — Authenticates property administrators.
+
+### Rooms
+* `GET /api/rooms/:hotelId` — Retrieves property-specific room configurations.
+
+### Bookings
+* `GET /api/bookings/availability/:hotelId` — Queries room availability by date range.
+* `POST /api/bookings` — Instantiates a new reservation and reduces inventory.
+* `GET /api/bookings?phone=` — Retrieves the historical archive for a guest.
+
+### Admin & QR
+* `PATCH /api/bookings/:id` — Mutates the lifecycle state of a reservation.
+* `POST /api/bookings/scan-qr` — Interprets a Digital Pass payload and validates entry.
 
 ---
 
-## 🖼️ Interface
+## Security
 
-<div align="center">
-  <img src="https://placehold.co/800x450/111111/FFFFFF/png?text=Landing+Page" alt="Landing" width="49%" />
-  <img src="https://placehold.co/800x450/111111/FFFFFF/png?text=Room+Details" alt="Room Details" width="49%" />
-</div>
-<br />
-<div align="center">
-  <img src="https://placehold.co/800x450/111111/FFFFFF/png?text=Booking+Flow" alt="Booking Flow" width="49%" />
-  <img src="https://placehold.co/800x450/111111/FFFFFF/png?text=Admin+Dashboard" alt="Admin Dashboard" width="49%" />
-</div>
+* **JWT:** Stateless authentication tokens with strict expiration windows.
+* **Password Hashing:** Administrative credentials are encrypted via Bcrypt prior to storage.
+* **Protected Routes:** Both React Router components and Express endpoints implement role-based guards.
+* **Validation:** Express payloads are sanitized and limited to `10kb` to mitigate DoS vulnerabilities.
+* **Environment Variables:** All secrets and URIs are injected at runtime via `.env`.
+* **CORS:** Cross-Origin Resource Sharing is strictly whitelisted to approved deployment domains.
 
 ---
 
-## 🏗️ System Architecture
+## Local Development
 
-graph TD
-    Client[React Frontend] -->|REST API via HTTPS| Gateway[Express.js Server]
-    Gateway --> Auth[JWT Authentication]
-    Gateway --> BusinessLogic[Controllers & Services]
-    BusinessLogic --> DB[(MongoDB)]
-    
-    classDef default fill:#111,stroke:#333,stroke-width:1px,color:#fff;
-    classDef database fill:#003300,stroke:#006600,stroke-width:1px,color:#fff;
-    class DB database;
-
----
-
-## 💻 Technology Stack
-
-### Frontend
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-![GSAP](https://img.shields.io/badge/GSAP-88CE02?style=for-the-badge&logo=greensock&logoColor=white)
-
-### Backend
-![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
-![Express.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)
-![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
-
-### Database
-![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
-
----
-
-## 🏁 Getting Started
-
-### Prerequisites
-* Node.js (v18 or higher)
-* MongoDB instance (local or Atlas)
-
-### 1. Clone the repository
+### 1. Clone
 ```bash
-git clone https://github.com/yourusername/innflow.git
+git clone https://github.com/keshavsharma05/innflow.git
 cd innflow
 ```
 
 ### 2. Install Dependencies
 ```bash
-# Install server dependencies
-cd server
 npm install
-
-# Install client dependencies
-cd ../client
-npm install
+cd server && npm install
 ```
 
 ### 3. Environment Variables
-Create a `.env` file in the `server` directory:
+Create a `.env` in `/server`:
 ```env
 PORT=5000
-MONGODB_URI=your_mongodb_connection_string
-JWT_SECRET=your_highly_secure_jwt_secret
+MONGODB_URI=mongodb://localhost:27017/hotel_booking
+JWT_SECRET=your_jwt_secret
+ADMIN_USER=admin
+ADMIN_PASS=123
+FRONTEND_URL=http://localhost:5173
 ```
 
-### 4. Run the Application
+### 4. Run Backend
 ```bash
-# Start the Express server (from the server directory)
+cd server
+npm run seed
 npm run dev
+```
 
-# Start the React frontend (from the client directory)
-npm start
+### 5. Run Frontend
+Open a new terminal session:
+```bash
+npm run dev
 ```
 
 ---
 
-## 📂 Project Structure
+## Deployment
 
-```text
-innflow/
-├── client/                 # React Frontend
-│   ├── public/
-│   └── src/
-│       ├── assets/         # Images, icons, and global styles
-│       ├── components/     # Reusable UI components
-│       ├── pages/          # Main application views
-│       ├── services/       # API integration layers
-│       └── utils/          # Helper functions
-│
-└── server/                 # Express Backend
-    ├── controllers/        # Request handling logic
-    ├── middleware/         # Auth and validation checks
-    ├── models/             # Mongoose database schemas
-    ├── routes/             # API endpoint definitions
-    └── utils/              # Server-side utilities
-```
+* **Frontend:** Configure Vercel to target the root directory and use `npm run build`. Set the `VITE_API_URL` environment variable to the deployed backend URL.
+* **Backend:** Deploy as a Web Service on Render targeting the `server/` root. Ensure `NODE_ENV=production` is set.
+* **Database:** Provision a MongoDB Atlas cluster, whitelist the Render outbound IP addresses, and inject the connection string into the backend environment.
 
 ---
 
-## 🗺️ Future Roadmap
+## Roadmap
 
-- [ ] **Payment Integration** (Stripe/PayPal for automated deposits)
-- [ ] **Email Notifications** (Automated booking confirmations and reminders)
-- [ ] **Advanced Analytics** (Occupancy rates and revenue reporting)
-- [ ] **Multi-Hotel Support** (Manage several properties from one account)
-- [ ] **Mobile Application** (Native app for on-the-go management)
+- [ ] Stripe Payment Gateway integration
+- [ ] Automated email confirmations via SendGrid
+- [ ] Real-time WebSocket notifications for new bookings
+- [ ] Dynamic pricing engine based on occupancy
+- [ ] Exportable CSV reports for revenue tracking
 
 ---
 
-## 🤝 Contributing
+## License
 
-We welcome contributions to make InnFlow even better. Please review our [Contributing Guidelines](CONTRIBUTING.md) before submitting pull requests.
+MIT
 
-## 📄 License
+---
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+<div align="center">
+  <p>Built by <strong>Keshav Sharma</strong></p>
+  <p>
+    <a href="https://github.com/keshavsharma05">GitHub</a> • 
+    <a href="https://linkedin.com/in/keshavsharma05">LinkedIn</a> • 
+    <a href="https://keshavsharma.dev">Portfolio</a>
+  </p>
+</div>

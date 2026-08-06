@@ -1,6 +1,5 @@
 <div align="center">
-  <img src="hero.png" alt="InnFlow Hero" width="100%" />
-
+  <img src="public/github-hero.png" alt="InnFlow Hero" width="100%" />
   <h1>InnFlow</h1>
   
   <p><strong>Modern Hotel Operations & Booking Platform</strong></p>

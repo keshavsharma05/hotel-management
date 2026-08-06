@@ -1,0 +1,45 @@
+.premium-loading-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  width: 100%;
+  min-height: 200px;
+}
+
+.premium-loading-wrapper.full-screen {
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #FAFAFA;
+  z-index: 9999;
+  min-height: unset;
+}
+
+.premium-loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(197, 169, 152, 0.2);
+  border-top-color: #C5A998;
+  border-radius: 50%;
+  animation: premium-spin 1s ease-in-out infinite;
+  margin-bottom: 1.5rem;
+}
+
+.premium-loading-text {
+  font-family: var(--font-primary, "Playfair Display", serif);
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #777;
+  font-weight: 400;
+  margin: 0;
+}
+
+@keyframes premium-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

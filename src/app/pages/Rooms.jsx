@@ -4,6 +4,7 @@ import Navbar from '../../marketing/components/Navbar/Navbar';
 import Footer from '../../marketing/components/Footer/Footer';
 import RoomCard from '../components/RoomCard/RoomCard';
 import Filters from '../components/Filters/Filters';
+import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 import { getAvailableRoomsByCategory } from '../../services/api';
 import './Rooms.css';
 
@@ -131,12 +132,7 @@ const Rooms = () => {
           </div>
 
           {isLoading ? (
-            <div className="fetching-state text-center" style={{ padding: '4rem 0' }}>
-              <div className="premium-loader"></div>
-              <h3 style={{ marginTop: '1.5rem', fontWeight: '300', letterSpacing: '0.05em' }}>
-                Fetching room categories...
-              </h3>
-            </div>
+            <LoadingSpinner text="Fetching room categories..." />
           ) : filteredRooms.length > 0 ? (
             <div className="rooms-grid-app">
               {filteredRooms.map((room, index) => (

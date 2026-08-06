@@ -27,6 +27,7 @@ import AdminLogin from './app/admin/AdminLogin';
 import { AuthProvider } from './services/AuthContext';
 import { HotelProvider } from './services/HotelContext';
 import ProtectedRoute from './app/components/ProtectedRoute';
+import LoadingSpinner from './app/components/LoadingSpinner/LoadingSpinner';
 
 function App() {
   const [isLoading, setIsLoading] = useState(() => {
@@ -98,13 +99,8 @@ function App() {
 }, []);
 
   if (isLoading) {
-  return (
-    <div className="loader">
-      <div className="loader__spinner"></div>
-      <p>Loading experience...</p>
-    </div>
-  );
-}
+    return <LoadingSpinner text="Loading experience..." fullScreen={true} />;
+  }
   return (
     <AuthProvider>
       <HotelProvider>

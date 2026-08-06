@@ -9,6 +9,7 @@ import Navbar from '../../marketing/components/Navbar/Navbar';
 import Footer from '../../marketing/components/Footer/Footer';
 import BookingForm from '../components/BookingForm/BookingForm';
 import AuthModal from '../components/AuthModal/AuthModal';
+import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 // OLD CODE
 // import { getCart, createBooking, removeFromCart, updateCartQuantity, getAvailableRoomsByCategory } from '../../services/api';
 // NEW CODE
@@ -144,7 +145,7 @@ const Booking = () => {
     }
   };
 
-  if (loading) return <div className="loading">Loading Selection...</div>;
+  if (loading) return <LoadingSpinner text="Loading Selection..." fullScreen={true} />;
 
   if (cart.length === 0) {
     return (

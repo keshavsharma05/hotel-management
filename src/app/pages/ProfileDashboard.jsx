@@ -5,6 +5,7 @@ import { useHotel } from '../../services/HotelContext';
 import { getUserBookings } from '../../services/api';
 import { hotels } from '../../data/hotelsData';
 import Navbar from '../../marketing/components/Navbar/Navbar';
+import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 import Footer from '../../marketing/components/Footer/Footer';
 import { RiHistoryLine, RiUserLine, RiLogoutBoxRLine, RiCalendarLine, RiHotelLine, RiInformationLine, RiPhoneLine, RiMapPinLine, RiWhatsappLine, RiArrowRightSLine, RiQrCodeLine } from 'react-icons/ri';
 import { FaCheck, FaTimes } from 'react-icons/fa';
@@ -113,7 +114,7 @@ const ProfileDashboard = () => {
           </div>
 
           {loading ? (
-            <div className="loading-state-premium">Establishing connection...</div>
+            <LoadingSpinner text="Establishing connection..." />
           ) : activeBookings.length > 0 ? (
             <div className="active-booking-grid">
               {activeBookings.map(booking => (
@@ -221,7 +222,7 @@ const ProfileDashboard = () => {
           </div>
 
           {loading ? (
-            <div className="loading-state-premium">Archiving memory...</div>
+            <LoadingSpinner text="Archiving memory..." />
           ) : pastBookings.length > 0 ? (
             <div className="archive-cards-grid">
               {bookingsToShow.map(booking => (

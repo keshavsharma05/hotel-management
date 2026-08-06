@@ -4,6 +4,7 @@ import { useHotel } from '../../services/HotelContext';
 import { getBookingById, getRooms } from '../../services/api';
 import { hotels } from '../../data/hotelsData';
 import Navbar from '../../marketing/components/Navbar/Navbar';
+import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 import Footer from '../../marketing/components/Footer/Footer';
 import {
   RiArrowLeftLine,
@@ -117,10 +118,7 @@ const BookingDetails = () => {
     return (
       <div className="booking-details-page">
         <Navbar />
-        <div className="container loading-container">
-          <div className="loading-spinner"></div>
-          <p>Fetching your booking details...</p>
-        </div>
+        <LoadingSpinner text="Fetching your booking details..." fullScreen={false} />
         <Footer />
       </div>
     );

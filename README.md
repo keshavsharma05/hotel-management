@@ -265,15 +265,6 @@ npm run dev
 
 ---
 
-## Roadmap
-
-- [ ] Stripe Payment Gateway integration
-- [ ] Automated email confirmations via SendGrid
-- [ ] Real-time WebSocket notifications for new bookings
-- [ ] Dynamic pricing engine based on occupancy
-- [ ] Exportable CSV reports for revenue tracking
-
----
 
 ## License
 

@@ -10,7 +10,7 @@
   </p>
 </div>
 
----
+<br />
 
 ## Overview
 
@@ -209,7 +209,13 @@ graph TD
 * **Environment Variables:** All secrets and URIs are injected at runtime via `.env`.
 * **CORS:** Cross-Origin Resource Sharing is strictly whitelisted to approved deployment domains.
 
----
+### Frontend (Client)
+* **Framework:** React 19 + Vite
+* **Routing:** React Router v7
+* **State Management:** React Context API (`AuthContext`, `HotelContext`)
+* **Styling:** Modular Vanilla CSS tailored for custom design tokens and fluid typography.
+* **Animation:** GSAP (GreenSock) & Lenis (Smooth Scroll)
+* **Utilities:** `react-icons`, `html5-qrcode`
 
 ## Local Development
 

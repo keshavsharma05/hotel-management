@@ -236,16 +236,10 @@ npm run dev
 ---
 
 
-## License
-
-MIT
-
----
-
 <div align="center">
   <p>Built by <strong>Keshav Sharma</strong></p>
   <p>
     <a href="https://github.com/keshavsharma05">GitHub</a> • 
-    <a href="www.linkedin.com/in/-keshav-sharma-">LinkedIn</a> • 
+    <a href="https://www.linkedin.com/in/-keshav-sharma-">LinkedIn</a> • 
   </p>
 </div>

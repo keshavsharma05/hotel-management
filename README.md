@@ -53,7 +53,6 @@ By eliminating the friction of traditional hotel software, InnFlow solves the du
 
 ## How InnFlow Works
 
-```mermaid
 flowchart LR
     A[React Client]
     B[Express API]
@@ -67,7 +66,7 @@ flowchart LR
     B --> C
     C --> D
     F --> B
-```
+
 ---
 
 ## Features

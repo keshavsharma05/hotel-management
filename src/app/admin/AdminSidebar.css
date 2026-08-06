@@ -1,257 +1,392 @@
-/* ===== ADMIN SIDEBAR — Hotel Theme ===== */
+/* ===== ADMIN SIDEBAR — MINIMALIST & REFINED ===== */
 
-.admin-sidebar {
+.admin-sidebar-minimal {
   width: 260px;
-  background-color: var(--primary);
-  color: var(--white);
+  background-color: #ffffff;
+  color: #1c1917; /* Dark charcoal text */
   height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
-  padding: 36px 24px;
+  padding: 36px 20px 24px;
   display: flex;
   flex-direction: column;
   z-index: 1000;
-  border-right: 1px solid rgba(181, 81, 50, 0.2);
-  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease;
-  overflow: hidden;
+  border-right: 1px solid #e7e5e0; /* Very clean, light neutral border */
+  transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), padding 0.3s ease;
+  overflow: visible;
 }
 
-/* Background Image Overlay elements */
-.sidebar-bg-image {
+/* Collapsed state */
+.admin-sidebar-minimal.collapsed {
+  width: 78px;
+  padding: 36px 14px 24px;
+}
+
+/* ─── Toggle Button (Sleek Flush Circle) ─── */
+.sidebar-toggle-btn-minimal {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-size: cover;
-  background-position: center;
-  filter: blur(25px);
-  transform: scale(1.15); /* Prevent blurred edges from leaking */
-  z-index: -2;
-}
-
-.sidebar-bg-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(180deg, rgba(44, 40, 37, 0.75) 0%, rgba(44, 40, 37, 0.95) 100%);
-  z-index: -1;
-}
-
-/* Subtle gold accent line at top */
-.admin-sidebar::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--secondary), var(--accent), var(--secondary));
-  z-index: 10;
-}
-
-.admin-sidebar.collapsed {
-  width: 80px;
-  padding: 36px 15px;
-}
-
-/* ─── Logo ─── */
-.admin-logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 18px;
-  line-height: 1.2;
-  margin-bottom: 52px;
-  margin-top: 6px;
-  letter-spacing: 0.08em;
-  white-space: nowrap;
-  overflow: hidden;
-  transition: all 0.3s;
-  color: var(--bg-primary);
-}
-
-.collapsed .admin-logo {
-  font-size: 15px;
-  text-align: center;
-}
-
-.admin-logo span {
-  display: block;
-  font-size: 9px;
-  color: var(--secondary);
-  font-family: 'Inter', sans-serif;
-  text-transform: uppercase;
-  margin-top: 6px;
-  font-weight: 800;
-  letter-spacing: 0.3em;
-}
-
-/* Decorative divider under logo */
-.admin-logo-divider {
-  width: 36px;
-  height: 1px;
-  background: linear-gradient(90deg, var(--secondary), transparent);
-  margin-bottom: 36px;
-  transition: opacity 0.3s;
-}
-
-.collapsed .admin-logo-divider {
-  opacity: 0;
-}
-
-/* ─── Nav ─── */
-.admin-nav {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.admin-nav-item {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 13px 18px;
-  border-radius: 10px;
-  color: rgba(255, 255, 255, 0.65);
-  font-size: 13.5px;
-  font-weight: 500;
-  text-decoration: none;
-  transition: all 0.25s ease;
-  letter-spacing: 0.01em;
-  position: relative;
-  overflow: hidden;
-}
-
-.admin-nav-item::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: var(--secondary);
-  border-radius: 0 2px 2px 0;
-  opacity: 0;
-  transition: opacity 0.25s;
-}
-
-.admin-nav-item:hover {
-  color: var(--white);
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.admin-nav-item:hover::before {
-  opacity: 0.5;
-}
-
-.collapsed .admin-nav-item {
-  justify-content: center;
-  padding: 14px 0;
-}
-
-.admin-nav-item.active {
-  background: linear-gradient(135deg, rgba(181, 81, 50, 0.35), rgba(181, 81, 50, 0.15));
-  color: var(--white);
-  border: 1px solid rgba(181, 81, 50, 0.4);
-  font-weight: 700;
-}
-
-.admin-nav-item.active::before {
-  opacity: 1;
-}
-
-.admin-nav-item svg {
-  font-size: 18px;
-  flex-shrink: 0;
-}
-
-/* ─── Footer / Bottom Links ─── */
-.admin-footer-links {
-  border-top: 1px solid rgba(181, 81, 50, 0.15);
-  padding-top: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.admin-logout {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  background: transparent;
-  border: none;
-  color: rgba(255, 255, 255, 0.55);
-  padding: 13px 18px;
-  font-size: 13.5px;
-  font-weight: 500;
-  width: 100%;
-  text-align: left;
-  cursor: pointer;
-  border-radius: 10px;
-  transition: all 0.25s;
-  font-family: 'Inter', sans-serif;
-}
-
-.admin-logout:hover {
-  color: #fca5a5;
-  background: rgba(239, 68, 68, 0.08);
-}
-
-.collapsed .admin-logout {
-  justify-content: center;
-  padding: 14px 0;
-}
-
-/* ─── Toggle Button ─── */
-.sidebar-toggle-v2 {
-  position: absolute;
-  right: -14px;
-  top: 44px;
-  width: 28px;
-  height: 28px;
-  background: var(--primary);
-  border: 1px solid rgba(181, 81, 50, 0.35);
-  color: var(--secondary);
+  right: -10px;
+  top: 42px;
+  width: 20px;
+  height: 20px;
+  background: #ffffff;
+  border: 1px solid #e7e5e0;
+  color: #78716c; /* Muted stone */
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 1001;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  transition: all 0.25s;
+  z-index: 1010;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.sidebar-toggle-btn-minimal:hover {
+  color: #1c1917;
+  border-color: #a8a29e;
+  background: #fafaf9;
+}
+
+.sidebar-toggle-btn-minimal .toggle-arrow-icon {
   font-size: 14px;
+  transition: transform 0.3s ease;
 }
 
-.sidebar-toggle-v2:hover {
-  background: var(--secondary);
-  color: var(--white);
-  border-color: var(--secondary);
-  transform: scale(1.1);
+.sidebar-toggle-btn-minimal.collapsed .toggle-arrow-icon {
+  transform: rotate(180deg);
 }
 
-/* ─── Responsive ─── */
+/* ─── Brand Logo & Header ─── */
+.sidebar-brand-minimal {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+  padding-left: 8px;
+  z-index: 1;
+}
+
+.collapsed .sidebar-brand-minimal {
+  padding-left: 0;
+  justify-content: center;
+}
+
+.brand-emblem {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  background: #fafaf9;
+  border: 1px solid #e7e5e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.brand-logo-img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  filter: grayscale(100%) brightness(0.2); /* Muted dark grey emblem */
+}
+
+.brand-text-minimal {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: fadeInMinimal 0.2s ease forwards;
+}
+
+.brand-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #1c1917;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.brand-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  color: #78716c;
+  margin-top: 1px;
+  white-space: nowrap;
+}
+
+.brand-divider-minimal {
+  height: 1px;
+  background: #e7e5e0;
+  margin-bottom: 24px;
+  margin-left: 8px;
+  margin-right: 8px;
+  z-index: 1;
+}
+
+.collapsed .brand-divider-minimal {
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+/* ─── Navigation Links ─── */
+.sidebar-nav-minimal {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 1;
+}
+
+.nav-item-minimal {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 16px;
+  border-radius: 6px;
+  color: #57534e; /* Clean charcoal-grey */
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  position: relative;
+  border: 1px solid transparent;
+}
+
+.nav-item-minimal .nav-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+.nav-item-minimal .nav-label {
+  white-space: nowrap;
+  animation: fadeInMinimal 0.2s ease forwards;
+}
+
+/* Hover style */
+.nav-item-minimal:hover {
+  color: #1c1917;
+  background: #fafaf9; /* Very faint warm light-grey background on hover */
+}
+
+.nav-item-minimal:hover .nav-icon {
+  color: #1c1917;
+}
+
+/* Active style */
+.nav-item-minimal.active {
+  background: #faf9f6; /* Very subtle sand-plaster background */
+  border-color: #e7e5e0;
+  color: #b55132; /* Brand copper accent */
+  font-weight: 600;
+}
+
+.nav-item-minimal.active .nav-icon {
+  color: #b55132;
+}
+
+/* Very subtle left-bar indicator */
+.nav-item-minimal.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 30%;
+  bottom: 30%;
+  width: 2px;
+  background: #b55132;
+  border-radius: 0 1px 1px 0;
+}
+
+/* Collapsed link styling */
+.collapsed .nav-item-minimal {
+  justify-content: center;
+  padding: 11px 0;
+}
+
+.collapsed .nav-item-minimal.active::before {
+  left: 2px;
+}
+
+/* ─── Footer Section ─── */
+.sidebar-footer-minimal {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-top: 1px solid #e7e5e0;
+  padding-top: 18px;
+  z-index: 1;
+}
+
+/* Admin User Profile Card */
+.user-card-minimal {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.user-avatar-minimal {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #fafaf9;
+  border: 1px solid #e7e5e0;
+  color: #78716c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.status-dot-minimal {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  border: 1px solid #ffffff;
+}
+
+.user-details-minimal {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.user-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1c1917;
+  white-space: nowrap;
+}
+
+.user-role {
+  font-size: 9px;
+  font-weight: 500;
+  color: #78716c;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+/* Collapsed User Card */
+.user-card-minimal.collapsed {
+  justify-content: center;
+  padding: 6px 0;
+}
+
+/* Footer Links and Action Button */
+.footer-links-minimal {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nav-item-minimal.back-site-btn {
+  color: #78716c;
+}
+
+.nav-item-minimal.back-site-btn:hover {
+  color: #1c1917;
+  background: #fafaf9;
+}
+
+.logout-btn-minimal {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  border: none;
+  color: #78716c;
+  padding: 11px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.logout-btn-minimal .nav-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.logout-btn-minimal:hover {
+  color: #ef4444;
+  background: #fef2f2;
+}
+
+.logout-btn-minimal:hover .nav-icon {
+  transform: translateX(-1px);
+}
+
+.collapsed .logout-btn-minimal {
+  justify-content: center;
+  padding: 11px 0;
+}
+
+/* ─── CSS Animations ─── */
+@keyframes fadeInMinimal {
+  from {
+    opacity: 0;
+    transform: translateX(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ─── Responsive Media Queries ─── */
 @media (max-width: 1024px) {
-  .admin-sidebar {
-    width: 80px;
-    padding: 30px 15px;
+  .admin-sidebar-minimal {
+    width: 78px;
+    padding: 36px 14px 24px;
   }
 
-  .admin-logo, .admin-nav-item span, .admin-logout span {
-    display: none;
+  /* Force collapse styling */
+  .brand-text-minimal,
+  .brand-divider-minimal + nav span,
+  .user-details-minimal,
+  .nav-item-minimal .nav-label,
+  .logout-btn-minimal .nav-label {
+    display: none !important;
   }
 
-  .admin-logo {
-    font-size: 12px;
-    margin-bottom: 40px;
-    display: block;
-  }
-
-  .admin-nav-item {
-    padding: 14px;
+  .sidebar-brand-minimal {
     justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .brand-divider-minimal {
+    margin-left: 2px;
+    margin-right: 2px;
+  }
+
+  .nav-item-minimal, 
+  .logout-btn-minimal {
+    justify-content: center;
+    padding: 11px 0;
+  }
+
+  .user-card-minimal {
+    justify-content: center;
+    padding: 6px 0;
   }
 }

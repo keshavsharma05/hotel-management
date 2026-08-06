@@ -28,6 +28,9 @@ const privateFetch = async (url, options = {}) => {
   const response = await fetch(url, { ...options, headers });
   
   if (response.status === 401) {
+    localStorage.removeItem('hotel_user_session_v1');
+    localStorage.removeItem('hotel_admin_session_v1');
+    window.dispatchEvent(new Event('auth-unauthorized'));
     return { error: 'Unauthorized', status: 401 };
   }
   
@@ -125,6 +128,13 @@ export const updateBooking = async (id, data) => {
   return privateFetch(`${API_URL}/bookings/${id}`, {
     method: 'PATCH',
     body: JSON.stringify(data)
+  });
+};
+
+export const scanBookingQR = async (qrData) => {
+  return privateFetch(`${API_URL}/bookings/scan-qr`, {
+    method: 'POST',
+    body: JSON.stringify({ qrData })
   });
 };
 

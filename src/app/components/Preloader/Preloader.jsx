@@ -11,8 +11,8 @@ const Preloader = ({ onComplete }) => {
   const contentRef = useRef(null);
   const bgImageRef = useRef(null);
 
-  const hotelName = currentHotel?.name || "The Luxury Inn";
-  const hotelLocation = currentHotel?.location || "London, UK";
+  const hotelName = currentHotel?.name || "Cozy Inn";
+  const hotelLocation = currentHotel?.location || "Lake View Road, Jaipur, Rajasthan, India";
 
   // Simulate progress loading smoothly
   useEffect(() => {

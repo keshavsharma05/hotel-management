@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useHotel } from '../../services/HotelContext';
-import AdminSidebar from './AdminSidebar';
 import { FaDollarSign, FaCalendarCheck, FaUsers } from 'react-icons/fa';
 import { getBookings, getRooms, updateBooking } from '../../services/api';
 import './Dashboard.css';
 
 const Dashboard = () => {
-  const { hotelId, currentHotel } = useHotel();
+  const { currentHotel } = useHotel();
   const [bookings, setBookings] = useState([]);
   const [rooms, setRooms] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     Promise.all([
@@ -26,9 +27,27 @@ const Dashboard = () => {
   const roomsOccupied = activeBookings.reduce((sum, b) => sum + (b.numRooms || 1), 0);
 
   const stats = [
-    { label: "Total Revenue", value: `$${bookings.reduce((sum, b) => sum + parseInt(String(b.total).replace('$', '') || 0), 0).toLocaleString()}`, icon: <FaDollarSign />, trend: "+12.5%", color: "#10b981" },
-    { label: "Total Rooms", value: rooms.length.toString(), icon: <FaCalendarCheck />, trend: "Physical", color: "#3b82f6" },
-    { label: "Available Today", value: Math.max(0, rooms.length - roomsOccupied).toString(), icon: <FaUsers />, trend: "Real-time", color: "#f59e0b" },
+    { 
+      label: "Total Revenue", 
+      value: `$${bookings.reduce((sum, b) => sum + parseInt(String(b.total).replace('$', '') || 0), 0).toLocaleString()}`, 
+      icon: <FaDollarSign />, 
+      trend: "+12.5%", 
+      color: "#b55132" // terracotta
+    },
+    { 
+      label: "Total Rooms", 
+      value: rooms.length.toString(), 
+      icon: <FaCalendarCheck />, 
+      trend: "Physical", 
+      color: "#2c2825" // espresso
+    },
+    { 
+      label: "Available Today", 
+      value: Math.max(0, rooms.length - roomsOccupied).toString(), 
+      icon: <FaUsers />, 
+      trend: "Real-time", 
+      color: "#d4a373" // warm accent
+    },
   ];
 
   const handleRoomAssignment = (id, newRoomNo) => {
@@ -45,43 +64,53 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-view">
-      <header className="admin-header">
-          <h1>{currentHotel?.name} Dashboard</h1>
-          <div className="admin-user-info">
-            <span>Welcome, <strong>{currentHotel?.name} Manager</strong></span>
-          </div>
-        </header>
+      <header className="admin-top-panel">
+        <div className="panel-title">
+          <h1>Dashboard Overview</h1>
+          <p>Welcome back, <strong>{currentHotel?.name || 'Hotel'} Manager</strong> — here is your hotel's status today</p>
+        </div>
+      </header>
 
-        <section className="stats-grid">
-          {stats.map((stat, i) => (
-            <div key={i} className="stat-card">
-              <div className="stat-info">
-                <span className="stat-label">{stat.label}</span>
-                <h2 className="stat-value">{stat.value}</h2>
-                <span className="stat-trend" style={{ color: stat.trend.startsWith('+') ? '#10b981' : '#ef4444' }}>
+      <section className="stats-grid">
+        {stats.map((stat, i) => (
+          <div 
+            key={i} 
+            className="stat-card-v2"
+            style={{ '--accent-color': stat.color }}
+          >
+            <div className="stat-info-v2">
+              <span className="stat-label-v2">{stat.label}</span>
+              <h2 className="stat-value-v2">{stat.value}</h2>
+              {stat.label === "Total Revenue" ? (
+                <span className="stat-trend-v2" style={{ color: '#10b981' }}>
                   {stat.trend} from last month
                 </span>
-              </div>
-              <div className="stat-icon" style={{ backgroundColor: stat.color + '20', color: stat.color }}>
-                {stat.icon}
-              </div>
+              ) : (
+                <span className="stat-trend-v2" style={{ color: '#7a7068' }}>
+                  {stat.trend} metrics
+                </span>
+              )}
             </div>
-          ))}
-        </section>
-
-        <section className="recent-activity">
-          <div className="card-header">
-            <h3>Recent Bookings</h3>
-            <button className="btn-link">View All</button>
+            <div className="stat-icon-v2" style={{ backgroundColor: stat.color + '15', color: stat.color }}>
+              {stat.icon}
+            </div>
           </div>
-          <table className="admin-table">
+        ))}
+      </section>
+
+      <section className="recent-activity-v2">
+        <div className="card-header-v2">
+          <h3>Recent Bookings</h3>
+          <button className="btn-link-v2" onClick={() => navigate('/admin/bookings')}>View All</button>
+        </div>
+        <div className="admin-table-v2-container">
+          <table className="admin-table-v2">
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Guest</th>
+                <th>Guest & ID</th>
                 <th>Room Type</th>
                 <th>Qty</th>
-                <th>Room No.</th>
+                <th>Room Selection</th>
                 <th>Check-in</th>
                 <th>Status</th>
                 <th>Total</th>
@@ -89,38 +118,79 @@ const Dashboard = () => {
             </thead>
             <tbody>
               {loading ? (
-                <tr><td colSpan="8" style={{textAlign: 'center', padding: '20px'}}>Loading...</td></tr>
+                <tr>
+                  <td colSpan="7" style={{ textAlign: 'center', padding: '30px', color: 'var(--text-light)' }}>
+                    Loading...
+                  </td>
+                </tr>
               ) : !Array.isArray(bookings) || bookings.length === 0 ? (
-                <tr><td colSpan="8" style={{textAlign: 'center', padding: '20px'}}>No recent bookings for {currentHotel?.name}.</td></tr>
+                <tr>
+                  <td colSpan="7" style={{ textAlign: 'center', padding: '30px', color: 'var(--text-light)' }}>
+                    No recent bookings for {currentHotel?.name || 'this hotel'}.
+                  </td>
+                </tr>
               ) : (
-                bookings.map(bk => (
+                bookings.slice(0, 5).map(bk => (
                   <tr key={bk.id}>
-                    <td><strong>#{bk.id}</strong></td>
-                    <td>{bk.guest}</td>
-                    <td style={{maxWidth: '200px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}} title={bk.type}>
-                      {bk.type}
-                    </td>
-                    <td><strong>{bk.numRooms || 1}</strong></td>
                     <td>
-                      <input 
-                        type="text" 
-                        className="room-assign-input"
-                        value={bk.roomNo} 
-                        onChange={(e) => handleRoomAssignment(bk.id, e.target.value)}
-                      />
+                      <div className="guest-info-v2">
+                        <span className="guest-name">{bk.guest}</span>
+                        <span className="booking-id-mini">#BK-{bk.id.substring(0, 5).toUpperCase()}</span>
+                      </div>
                     </td>
-                    <td>{bk.checkIn}</td>
-                    <td><span className={`badge ${bk.status.toLowerCase().replace(' ', '')}`}>{bk.status}</span></td>
-                    <td>{String(bk.total).startsWith('$') ? bk.total : `$${bk.total}`}</td>
+                    <td>
+                      <div className="room-type-info-v2" style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                        {bk.details && bk.details.length > 0 ? (
+                          bk.details.map((item, idx) => (
+                            <span key={idx} className="breakdown-badge-v2">
+                              {item.quantity}x {item.name}
+                            </span>
+                          ))
+                        ) : (
+                          <span className="breakdown-badge-v2">
+                            {bk.roomName || bk.type || 'Premium Room'}
+                          </span>
+                        )}
+                      </div>
+                    </td>
+                    <td>
+                      <strong style={{ color: 'var(--primary)' }}>{bk.numRooms || 1}</strong>
+                    </td>
+                    <td>
+                      <div className="assignment-cell-v2">
+                        <input 
+                          type="text" 
+                          className="room-assign-input-v2"
+                          value={bk.roomNo || ''} 
+                          placeholder="Assign Room"
+                          onChange={(e) => handleRoomAssignment(bk.id, e.target.value)}
+                        />
+                      </div>
+                    </td>
+                    <td>
+                      <div className="stay-dates-v2" style={{ border: 'none', background: 'transparent', padding: 0 }}>
+                        <span>{bk.checkIn}</span>
+                      </div>
+                    </td>
+                    <td>
+                      <span className={`status-pill-v2 ${bk.status.toLowerCase().replace(' ', '')}`}>
+                        {bk.status}
+                      </span>
+                    </td>
+                    <td>
+                      <strong style={{ color: 'var(--primary)', fontSize: '15px' }}>
+                        {String(bk.total).startsWith('$') ? bk.total : `$${bk.total}`}
+                      </strong>
+                    </td>
                   </tr>
                 ))
               )}
             </tbody>
           </table>
-        </section>
+        </div>
+      </section>
     </div>
   );
 };
 
 export default Dashboard;
-

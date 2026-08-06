@@ -19,22 +19,66 @@ export const AuthProvider = ({ children }) => {
 
   const [otpSent, setOtpSent] = useState(false);
 
-  // On mount: if we have a stored session, refresh user profile from MongoDB
+  // On mount: if we have a stored session, refresh user/admin profile from MongoDB
   useEffect(() => {
     const refreshProfile = async () => {
-      const saved = localStorage.getItem(USER_SESSION_KEY);
-      if (!saved) return;
-      const session = JSON.parse(saved);
-      if (!session?.token) return;
+      // 1. Refresh User
+      const savedUser = localStorage.getItem(USER_SESSION_KEY);
+      if (savedUser) {
+        try {
+          const session = JSON.parse(savedUser);
+          if (session?.token) {
+            const profile = await getUserProfile();
+            if (profile && !profile.error) {
+              const refreshed = { ...session, name: profile.name, role: profile.role };
+              localStorage.setItem(USER_SESSION_KEY, JSON.stringify(refreshed));
+              setUser(refreshed);
+            } else if (profile && (profile.status === 401 || profile.error === 'Unauthorized')) {
+              console.warn('[AUTH] User session is invalid or expired. Logging out.');
+              setUser(null);
+              localStorage.removeItem(USER_SESSION_KEY);
+            }
+          }
+        } catch (e) {
+          console.error('[AUTH] Failed to parse user session:', e);
+        }
+      }
 
-      const profile = await getUserProfile();
-      if (profile && !profile.error) {
-        const refreshed = { ...session, name: profile.name, role: profile.role };
-        localStorage.setItem(USER_SESSION_KEY, JSON.stringify(refreshed));
-        setUser(refreshed);
+      // 2. Refresh Admin
+      const savedAdmin = localStorage.getItem(ADMIN_SESSION_KEY);
+      if (savedAdmin) {
+        try {
+          const session = JSON.parse(savedAdmin);
+          if (session?.token) {
+            const profile = await getUserProfile();
+            if (profile && !profile.error) {
+              const refreshed = { ...session, role: profile.role };
+              localStorage.setItem(ADMIN_SESSION_KEY, JSON.stringify(refreshed));
+              setAdmin(refreshed);
+            } else if (profile && (profile.status === 401 || profile.error === 'Unauthorized')) {
+              console.warn('[AUTH] Admin session is invalid or expired. Logging out.');
+              setAdmin(null);
+              localStorage.removeItem(ADMIN_SESSION_KEY);
+            }
+          }
+        } catch (e) {
+          console.error('[AUTH] Failed to parse admin session:', e);
+        }
       }
     };
     refreshProfile();
+  }, []);
+
+  // Listen to global unauthorized event to clean up state immediately
+  useEffect(() => {
+    const handleUnauthorized = () => {
+      setUser(null);
+      setAdmin(null);
+    };
+    window.addEventListener('auth-unauthorized', handleUnauthorized);
+    return () => {
+      window.removeEventListener('auth-unauthorized', handleUnauthorized);
+    };
   }, []);
 
   // Persist session changes to localStorage

@@ -64,6 +64,9 @@ exports.verifyOTP = async (req, res) => {
 // GET /api/auth/me  (requires auth header)
 exports.getMe = async (req, res) => {
   try {
+    if (req.user && req.user.role === 'ADMIN') {
+      return res.json({ role: 'ADMIN', username: req.user.username });
+    }
     const user = await User.findOne({ phoneNumber: req.user.phoneNumber }).select('-__v');
     if (!user) return res.status(404).json({ message: 'User not found' });
     res.json({ phoneNumber: user.phoneNumber, name: user.name, role: user.role, createdAt: user.createdAt });

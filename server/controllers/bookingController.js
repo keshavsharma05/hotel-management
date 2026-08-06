@@ -2,6 +2,7 @@ const Booking = require('../models/Booking');
 const Room = require('../models/Room');
 const Lock = require('../models/Lock');
 const mongoose = require('mongoose');
+const qrcode = require('qrcode');
 
 async function backfillMultiRoomFieldsIfNeeded(bookingDoc) {
   if (process.env.ENABLE_BOOKING_BACKFILL !== 'true') return bookingDoc;
@@ -347,6 +348,14 @@ exports.createBooking = async (req, res) => {
       ...(Array.isArray(details) && details.length ? { details } : {})
     });
 
+    const checkoutDateObj = new Date(checkOut);
+    checkoutDateObj.setHours(12, 0, 0, 0);
+    const qrExpiry = checkoutDateObj;
+
+    const qrData = JSON.stringify({ bookingId });
+    newBooking.qrCodeUrl = await qrcode.toDataURL(qrData);
+    newBooking.qrExpiry = qrExpiry;
+
     await newBooking.save();
     res.status(201).json({ success: true, booking: newBooking });
   } catch (err) {
@@ -426,5 +435,46 @@ exports.deleteBooking = async (req, res) => {
     res.json({ success: true });
   } catch (err) {
     res.status(500).json({ message: err.message });
+  }
+};
+
+exports.scanQR = async (req, res) => {
+  try {
+    const { qrData } = req.body;
+    let data;
+    try {
+      data = JSON.parse(qrData);
+    } catch (e) {
+      return res.status(400).json({ success: false, message: 'Invalid QR format' });
+    }
+    
+    const { bookingId } = data;
+    const booking = await Booking.findOne({ id: bookingId });
+    if (!booking) return res.status(404).json({ success: false, message: 'Booking not found' });
+    
+    const now = new Date();
+    if (booking.qrExpiry && new Date(booking.qrExpiry) < now) {
+      if (booking.status !== 'Checked Out' && booking.status !== 'Completed') {
+         booking.status = 'Checked Out';
+         await booking.save();
+      }
+      return res.status(400).json({ success: false, message: 'QR Code Expired. Booking is Checked Out.' });
+    }
+    
+    if (booking.status === 'Checked In') {
+      return res.status(400).json({ success: false, message: 'Guest already checked in' });
+    }
+    
+    if (booking.status === 'Cancelled' || booking.status === 'Checked Out' || booking.status === 'Completed') {
+      return res.status(400).json({ success: false, message: `Booking is ${booking.status}` });
+    }
+    
+    booking.status = 'Checked In';
+    booking.checkInTimestamp = now;
+    await booking.save();
+    
+    res.json({ success: true, message: 'Check-in successful', booking });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
   }
 };

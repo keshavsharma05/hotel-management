@@ -28,7 +28,10 @@ const BookingSchema = new mongoose.Schema({
   roomIds: [String], // Multi-room reservations (allocated unit IDs)
   roomName: String,
   roomNo: String, // Assigned room numbers
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
+  qrCodeUrl: String,
+  qrExpiry: Date,
+  checkInTimestamp: Date
 }); // Enable versioning for optimistic locking
 
 // Indexes for performance and availability logic

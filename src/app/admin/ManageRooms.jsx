@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useHotel } from '../../services/HotelContext';
-import AdminSidebar from './AdminSidebar';
 import { getRooms, saveRoom, deleteRoom } from '../../services/api';
 import { FaPlus, FaEdit, FaTrash, FaTimes } from 'react-icons/fa';
 import './ManageRooms.css';
 
 const ManageRooms = () => {
-  const { hotelId, currentHotel } = useHotel();
+  const { currentHotel, hotelId } = useHotel();
   const [rooms, setRooms] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editingRoom, setEditingRoom] = useState(null);
@@ -71,53 +70,80 @@ const ManageRooms = () => {
 
   return (
     <div className="manage-rooms-view">
-      <header className="admin-header">
-          <h1>{currentHotel?.name} Rooms</h1>
-          <button className="btn-primary" onClick={() => handleOpenModal()}>
+      <header className="admin-top-panel">
+        <div className="panel-title">
+          <h1>Manage Rooms</h1>
+          <p>Configure and update room categories and numbers for {currentHotel?.name || 'Hotel'}</p>
+        </div>
+        <div className="panel-actions">
+          <button className="add-room-btn-v2" onClick={() => handleOpenModal()}>
             <FaPlus /> Add New Room
           </button>
-        </header>
+        </div>
+      </header>
 
-        <section className="rooms-management">
-          <div className="admin-table-container">
-            <table className="admin-table">
-              <thead>
+      <section className="rooms-management">
+        <div className="admin-table-v2-container">
+          <table className="admin-table-v2">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Room Number</th>
+                <th>Category</th>
+                <th>Price per Night</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rooms.length === 0 ? (
                 <tr>
-                  <th>Image</th>
-                  <th>Room Number</th>
-                  <th>Category</th>
-                  <th>Price</th>
-                  <th>Actions</th>
+                  <td colSpan="5" style={{ textAlign: 'center', padding: '30px', color: 'var(--text-light)' }}>
+                    No rooms found. Add a room to get started.
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {rooms.map(room => (
+              ) : (
+                rooms.map(room => (
                   <tr key={room.id}>
                     <td>
-                      <img src={room.image} alt={room.name} className="admin-room-thumb" />
+                      <div className="room-thumb-container">
+                        <img src={room.image} alt={room.name} className="admin-room-thumb-v2" />
+                      </div>
                     </td>
-                    <td><strong>{room.roomNumber}</strong></td>
-                    <td>{room.name}</td>
-                    <td>${room.price}</td>
                     <td>
-                      <div className="action-btns">
-                        <button className="btn-icon edit" onClick={() => handleOpenModal(room)}><FaEdit /></button>
-                        <button className="btn-icon delete" onClick={() => handleDelete(room.id)}><FaTrash /></button>
+                      <strong className="room-number-text">{room.roomNumber}</strong>
+                    </td>
+                    <td>
+                      <span className="room-category-badge">{room.name}</span>
+                    </td>
+                    <td>
+                      <strong style={{ color: 'var(--primary)', fontSize: '15px' }}>${room.price}</strong>
+                    </td>
+                    <td>
+                      <div className="action-cell-v2">
+                        <button className="smart-action-icon edit" title="Edit Room" onClick={() => handleOpenModal(room)}>
+                          <FaEdit />
+                        </button>
+                        <button className="smart-action-icon delete" title="Delete Room" onClick={() => handleDelete(room.id)}>
+                          <FaTrash />
+                        </button>
                       </div>
                     </td>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+      </section>
 
       {showModal && (
         <div className="admin-modal-overlay">
           <div className="admin-modal">
             <div className="admin-modal-header">
-              <h3>{editingRoom ? 'Edit Room' : 'Add New Room'}</h3>
-              <button className="btn-close-modal" onClick={() => setShowModal(false)}><FaTimes /></button>
+              <h3>{editingRoom ? 'Edit Room Properties' : 'Create New Room'}</h3>
+              <button className="btn-close-modal" onClick={() => setShowModal(false)}>
+                <FaTimes />
+              </button>
             </div>
             <form onSubmit={handleSubmit} className="admin-modal-form">
               <div className="form-group">
@@ -143,7 +169,6 @@ const ManageRooms = () => {
                   });
                 }}>
                   <option value="">Select Category</option>
-                  {/* Aggregated categories from original setup */}
                   {[...new Set(currentHotel?.rooms?.map(r => r.name))].map(catName => (
                     <option key={catName} value={catName}>{catName}</option>
                   ))}
@@ -170,4 +195,3 @@ const ManageRooms = () => {
 };
 
 export default ManageRooms;
-

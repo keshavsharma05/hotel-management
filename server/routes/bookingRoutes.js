@@ -13,6 +13,8 @@ router.get('/', authenticateUser, bookingController.getBookings);
 router.get('/:id', authenticateUser, bookingController.getBookingById);
 
 // ADMIN PROTECTED ROUTES
+router.post('/scan-qr', authenticateUser, authorizeAdmin, bookingController.scanQR);
+
 router.patch('/:id', 
   authenticateUser, 
   authorizeAdmin, 

@@ -74,16 +74,15 @@ const contentRef = useRef(null);
             <h2 className="history-headline">Industrial Soul, <br/>Modern Spirit</h2>
             <div className="history-copy">
               <p className="history-p1">
-                De Beauvoir is a residential conservation area bordering East London's trendy Dalston.
+                Situated along the serene Lake View Road in the vibrant heart of Jaipur, Rajasthan.
               </p>
               <div className="history-body">
                 <p>
-                  The decline of manufacturing has allowed art and culture to flourish in this area, 
-                  beautiful loft style living in a youthful vibrant atmosphere.
+                  The rich heritage of the Pink City perfectly complements the warm, welcoming atmosphere of our property.
                 </p>
                 <p>
-                  Located in an old printing press and furnished with unique design details, 
-                  the property retains an air of its industrial past, and subtle charm.
+                  Thoughtfully furnished with unique design details, 
+                  Cozy Inn retains an air of traditional charm blended with modern comfort.
                 </p>
               </div>
             </div>

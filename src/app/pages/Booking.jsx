@@ -123,7 +123,17 @@ const Booking = () => {
         // After a successful booking, clear cart so navbar badge + booking page reset.
         clearCart();
         setCart([]);
-        navigate(`/app/success`, { state: { bookingId: res.booking.id, roomName: roomBreakdown } });
+        localStorage.setItem('latestBooking', JSON.stringify({
+          ...res.booking,
+          roomName: roomBreakdown
+        }));
+        navigate(`/app/success`, { 
+          state: { 
+            bookingId: res.booking.id, 
+            roomName: roomBreakdown, 
+            booking: res.booking 
+          } 
+        });
       } else {
         setError(res.message || 'Failed to create booking. Please try again.');
         setIsSubmitting(false);

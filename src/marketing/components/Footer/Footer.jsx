@@ -20,9 +20,9 @@ const Footer = () => {
           <h2 className="footer-brand-logo">{brandName}</h2>
           <p className="footer-tagline-editorial">{currentHotel.tagline}</p>
           <div className="footer-social-minimal">
-            <a href="https://www.facebook.com/TheLuxuryInn/" target="_blank" rel="noopener noreferrer" className="social-icon-link"><FaFacebook /></a>
-            <a href="https://www.instagram.com/the_luxury_inn/" target="_blank" rel="noopener noreferrer" className="social-icon-link"><FaInstagram /></a>
-            <a href="https://maps.app.goo.gl/YabrAHJz7yqpUcWB6" target="_blank" rel="noopener noreferrer" className="social-icon-link"><FaMapMarkerAlt /></a>
+            <a href="https://facebook.com/cozyinn" target="_blank" rel="noopener noreferrer" className="social-icon-link"><FaFacebook /></a>
+            <a href="https://instagram.com/cozyinn" target="_blank" rel="noopener noreferrer" className="social-icon-link"><FaInstagram /></a>
+            <a href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer" className="social-icon-link"><FaMapMarkerAlt /></a>
           </div>
         </div>
 
@@ -55,11 +55,11 @@ const Footer = () => {
               </div>
               <div className="mini-contact-item">
                 <FaPhone className="mini-icon" />
-                <span>H: 0207 6833056 | M: 07961174997</span>
+                <span>+91 98765 43210</span>
               </div>
               <div className="mini-contact-item">
                 <FaEnvelope className="mini-icon" />
-                <span>bookings@luxuryinn.com</span>
+                <span>bookings@cozyinn.com</span>
               </div>
             </div>
           </div>
@@ -88,25 +88,25 @@ const Footer = () => {
             <div className="terms-modal-body">
               <h4>Deposit & payment</h4>
               <p>Card details will be taken during the booking process and the details checked. The details need to be valid to guaranty the booking. The booking will be cancelled if they are not valid.</p>
-              
+
               <h4>Cancellation policy</h4>
               <p>You can cancel you booking without any charge up to 7 days before the arrival day. Cancellations made after this time up to the arrival day will be charged 50% of the cost of the stay. Same day booking cancelations or no shows will be charged the cost of the booking.</p>
-              
+
               <h4>No outside guests</h4>
               <p>It is more about being considerate of other guests than being unfriendly. No outside guests unless previously agreed.</p>
-              
+
               <h4>Dogs</h4>
               <p>Only by prior arrangement at a cost of £5 per night.</p>
-              
+
               <h4>Damages</h4>
               <p>Guests will be held accountable for damages including damage to the property, furniture, floors and linens. Stains to linens will incur an extra minimum cleaning forward/replacement charge of £15.</p>
-              
+
               <h4>Check-in</h4>
-              <p>Earliest bag drop and pick up keys is 12:30 pm - the room won't be ready at this time.<br/><br/>Earliest the room can be ready is 2:30 pm if you let us know your arrival time in advance, we can then prioritise the early check-in. It is not possible to wait for the room to be ready as we need the space free so the cleaning can be done.<br/><br/>Self check-in is likely after 4 pm using a smart key box. The details for this will be sent separately after you have indicated your arrival time.<br/>If you are delayed or change plans please let me know.</p>
-              
+              <p>Earliest bag drop and pick up keys is 12:30 pm - the room won't be ready at this time.<br /><br />Earliest the room can be ready is 2:30 pm if you let us know your arrival time in advance, we can then prioritise the early check-in. It is not possible to wait for the room to be ready as we need the space free so the cleaning can be done.<br /><br />Self check-in is likely after 4 pm using a smart key box. The details for this will be sent separately after you have indicated your arrival time.<br />If you are delayed or change plans please let me know.</p>
+
               <h4>Check out</h4>
               <p>The latest check out of the room is 11 am. If you want to leave your bags and pick them up later. Make sure everything is packed up and when the housekeeper comes he will move the bags to underneath the stairs. Let me know what time you'll return and I will either send you a code for the front door key box or the housekeeper will be there to open the door so you can collect your bags.</p>
-              
+
               <h4>Guest behaviour</h4>
               <p>Due to the Open Plan nature of the property guests are required to be respectful in the communal areas.</p>
             </div>

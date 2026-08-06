@@ -19,6 +19,7 @@ import BookingDetails from './app/pages/BookingDetails';
 import Dashboard from './app/admin/Dashboard';
 import ManageRooms from './app/admin/ManageRooms';
 import ManageBookings from './app/admin/ManageBookings';
+import QRScanner from './app/admin/QRScanner';
 import AdminLayout from './app/admin/AdminLayout';
 import AdminLogin from './app/admin/AdminLogin';
 
@@ -132,6 +133,7 @@ function App() {
               <Route index element={<Dashboard />} />
               <Route path="rooms" element={<ManageRooms />} />
               <Route path="bookings" element={<ManageBookings />} />
+              <Route path="scan-qr" element={<QRScanner />} />
             </Route>
 
           </Routes>

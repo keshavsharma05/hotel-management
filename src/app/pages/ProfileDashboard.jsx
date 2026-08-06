@@ -6,8 +6,8 @@ import { getUserBookings } from '../../services/api';
 import { hotels } from '../../data/hotelsData';
 import Navbar from '../../marketing/components/Navbar/Navbar';
 import Footer from '../../marketing/components/Footer/Footer';
-import { RiHistoryLine, RiUserLine, RiLogoutBoxRLine, RiCalendarLine, RiHotelLine, RiInformationLine, RiPhoneLine, RiMapPinLine, RiWhatsappLine, RiArrowRightSLine } from 'react-icons/ri';
-import { FaCheck } from 'react-icons/fa';
+import { RiHistoryLine, RiUserLine, RiLogoutBoxRLine, RiCalendarLine, RiHotelLine, RiInformationLine, RiPhoneLine, RiMapPinLine, RiWhatsappLine, RiArrowRightSLine, RiQrCodeLine } from 'react-icons/ri';
+import { FaCheck, FaTimes } from 'react-icons/fa';
 import './ProfileDashboard.css';
 
 const ProfileDashboard = () => {
@@ -17,6 +17,8 @@ const ProfileDashboard = () => {
   const navigate = useNavigate();
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showQrModal, setShowQrModal] = useState(false);
+  const [activeQrBooking, setActiveQrBooking] = useState(null);
 
   useEffect(() => {
     if (!user) {
@@ -151,9 +153,9 @@ const ProfileDashboard = () => {
                     <button className="btn-action-premium btn-p-primary" onClick={() => handleAction('View Details', booking.id)}>
                       <RiInformationLine /> Details
                     </button>
-                    <a href="tel:+1234567890" className="btn-action-premium btn-p-outline">
-                      <RiPhoneLine /> Concierge
-                    </a>
+                    <button className="btn-action-premium btn-p-outline" onClick={() => { setActiveQrBooking(booking); setShowQrModal(true); }}>
+                      <RiQrCodeLine /> Check-In QR
+                    </button>
                   </div>
                 </div>
               ))}
@@ -162,7 +164,7 @@ const ProfileDashboard = () => {
             <div className="empty-state-surgical">
               <RiCalendarLine className="empty-icon-ghost" />
               <h3>Your journey begins here</h3>
-              <p>Start your next chapter at The Luxury Inn.</p>
+              <p>Start your next chapter at Cozy Inn.</p>
               <button
                 className="btn-browse-surgical"
                 onClick={() => navigate(`/app`)}
@@ -263,6 +265,85 @@ const ProfileDashboard = () => {
         </div>
       </div>
       <Footer />
+
+      {showQrModal && activeQrBooking && (
+        <div className="qr-modal-overlay" onClick={() => setShowQrModal(false)}>
+          <div className="qr-modal-content" onClick={e => e.stopPropagation()}>
+            <button className="qr-modal-close" onClick={() => setShowQrModal(false)} aria-label="Close modal">
+              <FaTimes />
+            </button>
+            
+            <div className="qr-modal-header-premium">
+              <span className="qr-modal-badge">
+                <span className="indicator-dot-pulse"></span>
+                Contactless Pass
+              </span>
+              <h3>Check-In Key</h3>
+              <p className="qr-modal-tagline">Present this code at reception or scan at lobby kiosks for direct entry.</p>
+            </div>
+
+            <div className="qr-modal-pass-body">
+              <div className="qr-modal-code-wrap">
+                {activeQrBooking.qrCodeUrl ? (
+                  <div className="qr-scanner-frame-mini">
+                    <div className="corner top-left"></div>
+                    <div className="corner top-right"></div>
+                    <img src={activeQrBooking.qrCodeUrl} alt="Check-In QR" className="qr-modal-image-actual" />
+                    <div className="corner bottom-left"></div>
+                    <div className="corner bottom-right"></div>
+                  </div>
+                ) : (
+                  <p className="qr-unavailable">QR Code not available.</p>
+                )}
+                <div className="scan-instructions-badge-mini">
+                  <span>SHOW AT RECEPTION</span>
+                </div>
+              </div>
+
+              <div className="qr-modal-info-card">
+                <div className="info-card-row">
+                  <span className="card-lbl">REF NUMBER</span>
+                  <strong className="card-val">#{activeQrBooking.id.split('-')[0].toUpperCase()}</strong>
+                </div>
+                <div className="info-card-row">
+                  <span className="card-lbl">GUEST</span>
+                  <span className="card-val">{activeQrBooking.guest || 'Valued Guest'}</span>
+                </div>
+                <div className="info-card-row">
+                  <span className="card-lbl">ACCOMMODATION</span>
+                  <strong className="card-val room-highlight">{activeQrBooking.roomName || 'Premium Room'}</strong>
+                </div>
+                {activeQrBooking.roomNo && (
+                  <div className="info-card-row">
+                    <span className="card-lbl">ROOM ASSIGNED</span>
+                    <strong className="card-val room-num-highlight">{activeQrBooking.roomNo}</strong>
+                  </div>
+                )}
+              </div>
+
+              <div className="qr-modal-stay-grid">
+                <div className="stay-grid-item">
+                  <span className="sg-lbl">CHECK-IN</span>
+                  <strong className="sg-val">{activeQrBooking.checkIn}</strong>
+                  <span className="sg-sub">From 2:00 PM</span>
+                </div>
+                <div className="sg-divider"></div>
+                <div className="stay-grid-item">
+                  <span className="sg-lbl">CHECK-OUT</span>
+                  <strong className="sg-val">{activeQrBooking.checkOut}</strong>
+                  <span className="sg-sub">Before 11:00 AM</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="qr-modal-footer">
+              <button className="btn-modal-done" onClick={() => setShowQrModal(false)}>
+                Done
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -9,10 +9,10 @@ dns.setServers(['8.8.8.8', '8.8.4.4']);
 const hotelsData = {
   theluxuryinn: {
     rooms: [
-      { roomNumber: "01", name: "Superior Double Room", type: "Luxury", price: 320, capacity: 2, image: "/images/hotel-property/superior_double_1.jpg", description: "Largest & most premium suite. King-size bed with luxury linens, direct access to a private terrace, and large factory-style windows." },
+      { roomNumber: "01", name: "Superior Double Room", type: "Luxury", price: 320, capacity: 2, image: "/images/hotel-property/superior_double_1.png", description: "Largest & most premium suite. King-size bed with luxury linens, direct access to a private terrace, and large factory-style windows." },
       { roomNumber: "02", name: "Standard Double Room", type: "Standard", price: 250, capacity: 2, image: "/images/hotel-property/standard_double_2.jpg", description: "Compact & minimalist design. Queen-size pillow-top mattress and private ensuite bathroom located on the 1st floor social hub." },
       { roomNumber: "03", name: "Standard Room (Courtyard)", type: "Standard", price: 180, capacity: 2, image: "/images/hotel-property/courtyard_1.jpg", description: "Ground floor for ultimate peace. Direct garden & courtyard access with a private bathroom just outside the room door." },
-      { roomNumber: "04", name: "Superior Twin Room", type: "Superior", price: 200, capacity: 2, image: "/images/hotel-property/twin_1.jpg", description: "Two separate single beds. Bright, airy 1st floor location with a spacious workspace area and private bathroom in the hallway." }
+      { roomNumber: "04", name: "Superior Twin Room", type: "Superior", price: 200, capacity: 2, image: "/images/hotel-property/twin_1.png", description: "Two separate single beds. Bright, airy 1st floor location with a spacious workspace area and private bathroom in the hallway." }
     ]
   }
 };

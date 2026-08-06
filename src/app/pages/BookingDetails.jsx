@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useHotel } from '../../services/HotelContext';
-import { getBookingById } from '../../services/api';
+import { getBookingById, getRooms } from '../../services/api';
+import { hotels } from '../../data/hotelsData';
 import Navbar from '../../marketing/components/Navbar/Navbar';
 import Footer from '../../marketing/components/Footer/Footer';
 import {
@@ -19,19 +20,81 @@ import './BookingDetails.css';
 
 const BookingDetails = () => {
   const { hotelId } = useHotel();
+  const hotelData = hotels[hotelId || 'theluxuryinn'];
   const { bookingId } = useParams();
   const navigate = useNavigate();
   const [booking, setBooking] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [copied, setCopied] = useState(false);
+  const [roomImage, setRoomImage] = useState(null);
+
+  const handleCopyId = () => {
+    if (!booking) return;
+    navigator.clipboard.writeText(booking.id);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   useEffect(() => {
     const fetchBooking = async () => {
-      const data = await getBookingById(bookingId);
-      setBooking(data);
-      setLoading(false);
+      try {
+        const data = await getBookingById(bookingId);
+        setBooking(data);
+        
+        if (data) {
+          // 1. Try to find the image in booking details first
+          let imageFound = data.details?.[0]?.image || null;
+
+          if (!imageFound) {
+            // Determine the clean room name/category
+            const cleanRoomName = data.details?.[0]?.name || data.roomName || data.type;
+            
+            if (cleanRoomName) {
+              // 2. Local Fallback Search in hotelsData
+              const matchedRoom = hotelData?.rooms?.find(
+                r => r.name.toLowerCase() === cleanRoomName.toLowerCase() ||
+                     cleanRoomName.toLowerCase().includes(r.name.toLowerCase())
+              );
+              if (matchedRoom?.image) {
+                imageFound = matchedRoom.image;
+              } else {
+                const matchedCat = hotelData?.roomCategories?.find(
+                  c => c.name.toLowerCase() === cleanRoomName.toLowerCase() ||
+                       cleanRoomName.toLowerCase().includes(c.name.toLowerCase())
+                );
+                if (matchedCat?.images?.[0]) {
+                  imageFound = matchedCat.images[0];
+                }
+              }
+              
+              // 3. Remote/API Fallback Search (handles dynamic/custom database rooms)
+              try {
+                const rooms = await getRooms();
+                if (Array.isArray(rooms)) {
+                  const matchedDbRoom = rooms.find(
+                    r => r.name.toLowerCase() === cleanRoomName.toLowerCase() ||
+                         cleanRoomName.toLowerCase().includes(r.name.toLowerCase())
+                  );
+                  if (matchedDbRoom?.image) {
+                    imageFound = matchedDbRoom.image;
+                  }
+                }
+              } catch (apiErr) {
+                console.error('Error fetching rooms for image matching:', apiErr);
+              }
+            }
+          }
+          
+          setRoomImage(imageFound);
+        }
+      } catch (err) {
+        console.error('Error fetching booking details:', err);
+      } finally {
+        setLoading(false);
+      }
     };
     fetchBooking();
-  }, [bookingId]);
+  }, [bookingId, hotelData]);
 
   const calculateNights = (start, end) => {
     if (!start || !end) return 1;
@@ -83,15 +146,24 @@ const BookingDetails = () => {
   const isUpcoming = new Date(booking.checkIn) > new Date() && booking.status !== 'Cancelled';
 
   return (
-    <div className="booking-details-page">
-      <Navbar />
+    <div className={`booking-details-page theme-${hotelId || 'theluxuryinn'}`}>
+      <Navbar forceSolid={false} />
 
-      <div className="booking-details-header">
-        <div className="container">
+      <div 
+        className="booking-details-header"
+        style={{ 
+          backgroundImage: `url(${hotelData?.heroImage || 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?q=80&w=2074&auto=format&fit=crop'})`
+        }}
+      >
+        <div className="hero-overlay-cinematic"></div>
+        <div className="container header-container-surgical">
           <button className="back-btn" onClick={() => navigate(-1)}>
             <RiArrowLeftLine /> Back to Profile
           </button>
-          <h1>Booking Details</h1>
+          <div className="header-meta-details">
+            <span className="details-badge-pill">Reservation Details</span>
+            <h1 className="details-title-serif">Your Reservation #{booking.id.split('-')[0].toUpperCase()}</h1>
+          </div>
         </div>
       </div>
 
@@ -109,8 +181,8 @@ const BookingDetails = () => {
               </div>
               <div className="summary-header">
                 <div className="room-image-preview">
-                  {booking.details?.[0]?.image ? (
-                    <img src={booking.details[0].image} alt="Room" />
+                  {roomImage ? (
+                    <img src={roomImage} alt="Room" />
                   ) : (
                     <div className="image-placeholder"><RiHotelLine /></div>
                   )}
@@ -124,7 +196,7 @@ const BookingDetails = () => {
                       'Premium Room'}
                   </h2>
                   <div className="summary-meta">
-                    <span className="hotel-name">The Luxury Inn</span>
+                    <span className="hotel-name">Cozy Inn</span>
                     <span className="separator"></span>
                     <span className="booking-status-text">
                       {isCompleted(booking.status) ? 'Completed Stay' : 'Active Reservation'}
@@ -135,7 +207,16 @@ const BookingDetails = () => {
               <div className="summary-footer">
                 <div className="booking-pin">
                   <span className="pin-label">CONFIRMATION NUMBER</span>
-                  <span className="pin-value">{booking.id.split('-')[0].toUpperCase()}</span>
+                  <div className="pin-value-container">
+                    <span className="pin-value">{booking.id.split('-')[0].toUpperCase()}</span>
+                    <button 
+                      className={`copy-btn-action-mini ${copied ? 'copied' : ''}`}
+                      onClick={handleCopyId}
+                      title="Copy Confirmation Number"
+                    >
+                      {copied ? 'Copied' : 'Copy'}
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

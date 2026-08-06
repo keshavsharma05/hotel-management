@@ -8,11 +8,15 @@ const app = express();
 // Connect to Database
 connectDB();
 
+// Initialize cron jobs
+require('./cronJobs');
+
 // Middleware
 const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:5174',
-  'https://theluxuryinn.vercel.app'
+  'https://theluxuryinn.vercel.app',
+  process.env.FRONTEND_URL // Allow dynamically setting from Render env vars
 ];
 app.use(cors({
   origin: function (origin, callback) {

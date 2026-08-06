@@ -69,7 +69,6 @@ By eliminating manual ledgers, InnFlow empowers both guests and managers with sy
 
 ## 🏗️ System Architecture
 
-```mermaid
 graph TD
     Client[React Frontend] -->|REST API via HTTPS| Gateway[Express.js Server]
     Gateway --> Auth[JWT Authentication]
@@ -79,7 +78,6 @@ graph TD
     classDef default fill:#111,stroke:#333,stroke-width:1px,color:#fff;
     classDef database fill:#003300,stroke:#006600,stroke-width:1px,color:#fff;
     class DB database;
-```
 
 ---
 

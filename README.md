@@ -1,4 +1,3 @@
-```markdown
 <div align="center">
   <img src="hero.png" alt="InnFlow Hero" width="100%" />
 
@@ -185,4 +184,3 @@ We welcome contributions to make InnFlow even better. Please review our [Contrib
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-```

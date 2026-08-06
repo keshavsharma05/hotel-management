@@ -246,7 +246,6 @@ MIT
   <p>Built by <strong>Keshav Sharma</strong></p>
   <p>
     <a href="https://github.com/keshavsharma05">GitHub</a> • 
-    <a href="https://linkedin.com/in/keshavsharma05">LinkedIn</a> • 
-    <a href="https://keshavsharma.dev">Portfolio</a>
+    <a href="www.linkedin.com/in/-keshav-sharma-">LinkedIn</a> • 
   </p>
 </div>

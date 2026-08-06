@@ -50,19 +50,8 @@ By eliminating the friction of traditional hotel software, InnFlow solves the du
 </table>
 
 ---
-
-## How InnFlow Works
-
-```mermaid
-flowchart LR
-    A[Guest Visits Website] --> B[Select Check-in & Check-out]
-    B --> C[Browse Available Rooms]
-    C --> D[Create Reservation]
-    D --> E[Digital Guest Pass]
-    E --> F[Owner Scans QR]
-    F --> G[Guest Checked In]
-```
-
+##
+  <img src="./public/github/hiw.png" alt="InnFlow Banner" width="100%" />
 ---
 
 ## Features
@@ -101,22 +90,8 @@ flowchart LR
 </table>
 
 ---
-
-## Architecture
-
-```mermaid
-graph TD
-    A[React Client] -->|REST API| B(Express Node.js Server)
-    B -->|Middleware| C{JWT Authentication}
-    C -->|Authorized| D[(MongoDB Atlas)]
-    C -->|Unauthorized| A
-    
-    subgraph Deployment
-        Vercel[Vercel Edge] -.-> A
-        Render[Render Cloud] -.-> B
-    end
-```
-
+##
+  <img src="./public/github/architechture.png" alt="InnFlow Banner" width="100%" />
 ---
 
 ## Tech Stack

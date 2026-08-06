@@ -51,8 +51,7 @@ By eliminating the friction of traditional hotel software, InnFlow solves the du
 
 ---
 ##
-  <img src="./public/github/hiw.png" alt="InnFlow Banner" width="100%" />
-##
+  <img src="./public/github/hiw.png" alt="InnFlow hiw" width="100%" />
 
 ## Features
 
@@ -91,8 +90,7 @@ By eliminating the friction of traditional hotel software, InnFlow solves the du
 
 ---
 ##
-  <img src="./public/github/architechture.png" alt="InnFlow Banner" width="100%" />
----
+  <img src="./public/github/architechture.png" alt="InnFlow architechture" width="100%" />
 
 ## Tech Stack
 
